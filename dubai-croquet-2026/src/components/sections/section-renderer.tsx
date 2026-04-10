@@ -1,6 +1,9 @@
 import { CtaSection } from '@/components/sections/cta-section'
+import { ContactSection } from '@/components/sections/contact-section'
 import { FeatureHighlightSection } from '@/components/sections/feature-highlight-section'
+import { FaqSection } from '@/components/sections/faq-section'
 import { HeroSection } from '@/components/sections/hero-section'
+import { MediaGallerySection } from '@/components/sections/media-gallery-section'
 import { QuoteSection } from '@/components/sections/quote-section'
 import { TextSection } from '@/components/sections/text-section'
 import type { NarrativeSection } from '@/components/sections/types'
@@ -33,6 +36,22 @@ export function SectionRenderer({ sections }: SectionRendererProps) {
               <FeatureHighlightSection
                 key={key}
                 {...(section as unknown as Extract<NarrativeSection, { _template: 'featureHighlightSection' }>)}
+              />
+            )
+          case 'faqSection':
+            return <FaqSection key={key} {...(section as unknown as Extract<NarrativeSection, { _template: 'faqSection' }>)} />
+          case 'mediaGallerySection':
+            return (
+              <MediaGallerySection
+                key={key}
+                {...(section as unknown as Extract<NarrativeSection, { _template: 'mediaGallerySection' }>)}
+              />
+            )
+          case 'contactSection':
+            return (
+              <ContactSection
+                key={key}
+                {...(section as unknown as Extract<NarrativeSection, { _template: 'contactSection' }>)}
               />
             )
           default:
