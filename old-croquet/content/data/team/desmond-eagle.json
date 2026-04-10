@@ -1,0 +1,12 @@
+{
+    "type": "Person",
+    "firstName": "Piers",
+    "lastName": "S",
+    "role": "Captain, Chairperson, Clements Cup Champion",
+    "bio": "Generally general, Sir Piers Fortescue Dithering Dribblesby, our most glorious leader, Chairperson of the committee, Captain of the  Dubai croquet club and joint holder of the 2021 Clements Cup.\n",
+    "image": {
+        "type": "ImageBlock",
+        "url": "/images/the-captain.jpg",
+        "altText": "The Dubai Croquet Club Committee Chairperson"
+    }
+}

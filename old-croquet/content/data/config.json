@@ -1,0 +1,212 @@
+{
+    "type": "Config",
+    "favicon": "/images/dlcc-logo-1.ico",
+    "header": {
+        "headerVariant": "variant-c",
+        "primaryColors": "colors-a",
+        "secondaryColors": "colors-f",
+        "title": "Dubai Croquet Club",
+        "isTitleVisible": true,
+        "primaryLinks": [
+            {
+                "type": "Link",
+                "label": "Home",
+                "url": "/",
+                "altText": ""
+            },
+            {
+                "label": "The Game",
+                "altText": "The Game",
+                "url": "/the-game",
+                "showIcon": false,
+                "icon": "arrowRight",
+                "iconPosition": "right",
+                "elementId": "",
+                "type": "Link"
+            },
+            {
+                "label": "Events",
+                "altText": "Events",
+                "url": "/events",
+                "showIcon": false,
+                "icon": "arrowRight",
+                "iconPosition": "right",
+                "elementId": "",
+                "type": "Link"
+            },
+            {
+                "label": "Leader Board",
+                "altText": "",
+                "url": "/leader-board",
+                "showIcon": false,
+                "icon": "arrowRight",
+                "iconPosition": "right",
+                "elementId": "",
+                "type": "Link"
+            },
+            {
+                "type": "Link",
+                "label": "FAQ",
+                "url": "/faq",
+                "altText": ""
+            },
+            {
+                "type": "Link",
+                "label": "News",
+                "altText": "News",
+                "url": "/news"
+            },
+            {
+                "label": "Gallery",
+                "altText": "",
+                "url": "/gallery",
+                "showIcon": false,
+                "icon": "arrowRight",
+                "iconPosition": "right",
+                "elementId": "",
+                "type": "Link"
+            },
+            {
+                "label": "About Us",
+                "altText": "About Us",
+                "url": "/about-us",
+                "showIcon": false,
+                "icon": "arrowRight",
+                "iconPosition": "right",
+                "elementId": "",
+                "type": "Link"
+            },
+            {
+                "label": "Contact Us",
+                "altText": "",
+                "url": "/contact-us",
+                "showIcon": false,
+                "icon": "arrowRight",
+                "iconPosition": "right",
+                "elementId": "",
+                "type": "Link"
+            }
+        ],
+        "secondaryLinks": [],
+        "styles": {
+            "self": {
+                "width": "narrow",
+                "padding": [
+                    "pt-5",
+                    "pb-5",
+                    "pr-4",
+                    "pl-4"
+                ]
+            }
+        },
+        "logo": {
+            "altText": "Dubai Croquet Club",
+            "caption": "Caption of the image",
+            "elementId": "",
+            "styles": {
+                "self": {
+                    "opacity": 100
+                }
+            },
+            "type": "ImageBlock",
+            "url": "/images/dlcc-logo.webp"
+        }
+    },
+    "footer": {
+        "colors": "colors-h",
+        "logo": {
+            "altText": "Dubai Croquet Club Logo",
+            "caption": "Caption of the image",
+            "elementId": "",
+            "styles": {
+                "self": {
+                    "opacity": 100
+                }
+            },
+            "type": "ImageBlock",
+            "url": "/images/DCC-LOGO-COLOUR.svg"
+        },
+        "title": "Dubai Croquet Club",
+        "contacts": {
+            "title": "Contact details",
+            "phoneNumber": "+971 50 760 8210",
+            "phoneAltText": "Phone Number",
+            "email": "hello@dubaicroquet.com",
+            "emailAltText": "Our email",
+            "addressAltText": "Our address"
+        },
+        "copyrightText": "Copyright [Dubai Croquet Club](https://www.dubaicroquet.com/) 2023\n",
+        "primaryLinks": [
+            {
+                "type": "Link",
+                "label": "Home",
+                "url": "/",
+                "altText": ""
+            },
+            {
+                "type": "Link",
+                "label": "Links",
+                "url": "/links",
+                "altText": ""
+            },
+            {
+                "type": "Link",
+                "label": "player registration",
+                "altText": "player registration link",
+                "url": "/player-registration",
+                "showIcon": false,
+                "icon": "arrowRight",
+                "iconPosition": "right",
+                "elementId": ""
+            }
+        ],
+        "socialLinks": [
+            {
+                "type": "Social",
+                "altText": "Twitter",
+                "label": "Twitter",
+                "url": "https://twitter.com/dubaicroquet",
+                "icon": "twitter"
+            },
+            {
+                "type": "Social",
+                "label": "Facebook",
+                "altText": "Facebook",
+                "url": "https://facebook.com/dubaicroquet",
+                "icon": "facebook",
+                "style": "link",
+                "elementId": ""
+            },
+            {
+                "type": "Social",
+                "altText": "Instagram",
+                "label": "Instagram",
+                "url": "https://www.instagram.com/dubaicroquet/",
+                "icon": "instagram"
+            }
+        ],
+        "legalLinks": [
+            {
+                "type": "Link",
+                "label": "Privacy Policy",
+                "url": "/"
+            },
+            {
+                "type": "Link",
+                "label": "Terms & Conditions",
+                "url": "/termsandconditions"
+            }
+        ],
+        "styles": {
+            "self": {
+                "width": "narrow",
+                "padding": [
+                    "pt-16",
+                    "pb-16",
+                    "pr-4",
+                    "pl-4"
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "firstName": "Maz",
+    "lastName": "G",
+    "role": "Mallet Monster",
+    "bio": "Small but mighty and she makes incredible cakes.\n\nMaz would totally help you hide a body in the desert. She would then accidentally give up the location to a passerby while trying to save a stay cat from living it's own best feral life.\n\nBeware the mallet monster, she makes some styling shots.\n",
+    "image": {
+        "url": "/images/Screen Shot 2022-01-16 at 2.33.07 PM.png",
+        "altText": "Person photo"
+    },
+    "type": "Person"
+}
