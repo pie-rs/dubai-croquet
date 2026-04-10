@@ -119,8 +119,10 @@ recentPostsSection  -> src/components/sections/recent-posts-section.tsx
 - The `_template` field on sections discriminates which component to render
 - During migration, read content through the shared filesystem-backed helpers in `src/lib/tina.ts`
 - Defer Tina generated-client adoption until the public routes are in place and Tina Cloud setup is complete
-- For rich-text fields, use `@tinacms/mdx` or `TinaMarkdown` renderer
+- Posts stay in MDX, but JSON-backed page/config/team fields store markdown-capable strings rather than Tina rich-text AST
+- Render those JSON-backed markdown strings with the shared markdown renderer once sections are built
 - Keep form field definitions in code via `formKey`; do not rebuild Stackbit's generic form-builder schema in Tina
+- Legacy content migration is scripted via `pnpm run migrate:legacy-content`
 
 ### Styling Patterns
 
@@ -141,6 +143,7 @@ recentPostsSection  -> src/components/sections/recent-posts-section.tsx
 - Preserve all team member data
 - Images are in `public/images/` (copy from old site)
 - Mirror remotely hosted blog images locally during migration
+- Store blog-specific assets under `public/images/blog/<slug>/` and keep each post self-contained when practical
 
 ## Workflow Rules
 
