@@ -75,15 +75,15 @@ Every task or tightly scoped subtask must end with:
 
 ## Phase 5: Public Layout Shell
 
-- [ ] Create `src/components/site-header.tsx`
-- [ ] Create `src/components/site-footer.tsx`
-- [ ] Create `src/app/(public)/layout.tsx`
-- [ ] Drive nav, footer, contact, and social data from Tina config
-- [ ] Keep auth/dashboard/worker code intact and excluded from public navigation
-- [ ] **Test**: header renders preserved nav links and logo
-- [ ] **Test**: footer renders contact, legal, and social links
-- [ ] **Test**: mobile menu opens and closes correctly
-- [ ] **Commit**: `feat: add public site layout shell`
+- [x] Create `src/components/site-header.tsx`
+- [x] Create `src/components/site-footer.tsx`
+- [x] Create `src/app/(public)/layout.tsx`
+- [x] Drive nav, footer, contact, and social data from Tina config
+- [x] Keep auth/dashboard/worker code intact and excluded from public navigation
+- [x] **Test**: header renders preserved nav links and logo
+- [x] **Test**: footer renders contact, legal, and social links
+- [x] **Test**: mobile menu opens and closes correctly
+- [x] **Commit**: `feat: add public site layout shell`
 
 ## Phase 6: Section System
 

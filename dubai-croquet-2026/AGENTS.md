@@ -51,6 +51,7 @@ This project uses `pnpm`. All commands should use `pnpm`:
 src/app/
   (public)/                    # Public content pages
     layout.tsx                 # SiteHeader + SiteFooter wrapper
+    page.tsx                   # Temporary public homepage until catch-all lands
     [[...slug]]/page.tsx       # Catch-all: renders CMS pages by slug
     blog/[slug]/page.tsx       # Blog post pages
   (auth)/                      # Auth pages (hidden from nav, still functional)
@@ -100,6 +101,7 @@ recentPostsSection  -> src/components/sections/recent-posts-section.tsx
 - Install required shadcn primitives before building sections that depend on them
 - Section components go in `src/components/sections/`
 - Shared layout components (header, footer) go in `src/components/`
+- The public homepage now lives under `src/app/(public)/page.tsx`; replace it with the catch-all route once section rendering is in place
 - All components use the `cn()` utility from `src/lib/utils.ts` for className merging
 - Use Next.js `Image` component for all images (not `<img>`)
 - Use `lucide-react` for icons
