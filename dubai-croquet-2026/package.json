@@ -35,7 +35,7 @@
     "@vercel/speed-insights": "^2.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "drizzle-orm": "^0.45.1",
+    "drizzle-orm": "^0.45.2",
     "lucide-react": "^0.577.0",
     "nanoid": "^5.1.7",
     "next": "16.1.7",
