@@ -14,10 +14,19 @@ We are rebuilding the Dubai Croquet Club website (currently at dubaicroquet.com,
 
 ## Architecture
 
+### Package Manager
+
+This project uses **pnpm** (not npm). All commands use `pnpm` instead of `npm`:
+- `pnpm install` (not `npm install`)
+- `ppnpm run dev` (not `pnpm run dev`)
+- `pnpm add <pkg>` / `pnpm add -D <pkg>` (not `npm install`)
+- `pnpm dlx shadcn add <component>` (not `npx shadcn add`)
+- `pnpm test`, `ppnpm run lint`, `ppnpm run build`
+
 ### Two Processes (inherited from template)
 
 1. **Next.js standalone web server** - serves pages and API Route Handlers
-2. **Worker process** (`npm run worker`) - pg-boss consumer (not used yet)
+2. **Worker process** (`ppnpm run worker`) - pg-boss consumer (not used yet)
 
 ### Content Architecture
 
@@ -90,8 +99,8 @@ recentPostsSection  -> src/components/sections/recent-posts-section.tsx
 - Schema definition: `tina/config.ts`
 - Client helpers: `src/lib/tina.ts`
 - Content files: `content/pages/*.md`, `content/data/*.json`
-- Run TinaCMS + dev server together: `npm run tina:dev`
-- Build: `npm run tina:build && npm run build`
+- Run TinaCMS + dev server together: `pnpm run tina:dev`
+- Build: `pnpm run tina:build && pnpm run build`
 - The `_template` field on sections discriminates which component to render
 - Use TinaCMS's generated client for all content queries
 - For rich-text fields, use `@tinacms/mdx` or `TinaMarkdown` renderer
@@ -117,7 +126,8 @@ recentPostsSection  -> src/components/sections/recent-posts-section.tsx
 
 Phases must be completed in order. Within a phase, tasks can often be parallelized.
 
-1. **Phase 1** (Design Tokens) - no dependencies, do first
+0. **Phase 0** (pnpm Migration) - do first, before anything else
+1. **Phase 1** (Design Tokens) - needs Phase 0
 2. **Phase 2** (TinaCMS) - needs Phase 1 for correct theming
 3. **Phase 3** (Layout Shell) - needs Phase 2 for config data
 4. **Phase 4** (Section Components) - needs Phase 3 for layout context
@@ -128,11 +138,40 @@ Phases must be completed in order. Within a phase, tasks can often be paralleliz
 
 ## Testing
 
-- `npm test` - Vitest unit tests
-- `npm run lint` - ESLint
-- `npm run format:check` - Prettier
-- `npm run check:circular` - madge circular dependency check
-- Visual comparison against dubaicroquet.com for design fidelity
+### Commands
+
+- `pnpm test` - Vitest unit tests
+- `pnpm run test:watch` - Vitest watch mode
+- `pnpm run lint` - ESLint
+- `pnpm run format:check` - Prettier
+- `pnpm run check:circular` - madge circular dependency check
+- `pnpm dlx playwright test` - E2E tests
+
+### Testing Strategy
+
+Tests should be written **alongside** each component/route, not deferred to the end.
+
+**Unit tests** (Vitest, `src/**/*.test.ts(x)`):
+- Every section component: renders correctly with mock props, handles missing optional props gracefully
+- SectionRenderer: dispatches to correct component by `_template` field
+- SiteHeader/SiteFooter: renders expected nav links, logo, contact info
+- API route handlers: valid input returns success, invalid input returns 400 with Zod errors, missing required fields rejected
+- TinaCMS client helpers: mock the generated client, verify query construction
+
+**E2E tests** (Playwright, `e2e/`):
+- Navigate every page in the nav and verify it renders without errors
+- Submit the contact form with valid data
+- Submit the contact form with invalid data and verify validation errors
+- View a blog post from the news page
+- Verify responsive header (mobile hamburger menu opens/closes)
+- Visual comparison screenshots against dubaicroquet.com (optional but recommended)
+
+**Test file conventions**:
+- Co-locate unit tests: `src/components/sections/hero-section.test.tsx` next to `hero-section.tsx`
+- API route tests: `src/app/api/contact/route.test.ts` next to `route.ts`
+- E2E tests: `e2e/` directory (existing pattern)
+- Use `vi.mock()` for TinaCMS client in component tests
+- Use `@testing-library/react` for component rendering tests
 
 ## Environment Variables
 
