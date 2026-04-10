@@ -6,6 +6,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A production-grade Next.js starter template. Auth, database, background jobs, error monitoring, analytics, design system, and tooling — all wired up and ready to build on.
 
+## Migration Note
+
+This repo is being adapted into the Dubai Croquet Club website. Preserve the legacy public URLs, content, and overall layout/feel while using shadcn primitives as the implementation layer.
+
+Until the pnpm migration task is complete, some template commands may still reference `npm`/`npx`. Treat package-manager normalization as a first-class task, not an assumption.
+
 ## Dev Commands
 
 ```bash
@@ -98,6 +104,15 @@ Schema is at `src/db/schema.ts` — starts empty. Add your tables, run `drizzle-
 - Route params are `Promise<>` in Next.js 16 — must `await params`
 - `requireAuth()` returns `{ user, error }` — check error first, return early
 - Zod validates all API inputs
+
+## Delivery Rules
+
+- Each completed task or tightly scoped subtask must include:
+  - relevant doc updates when workflow, assumptions, or architecture changed
+  - local verification for the touched area
+  - one atomic git commit before moving on
+- Install required shadcn primitives before building composed site components that depend on them
+- Keep form schemas code-owned; use content-configured `formKey` values instead of CMS-defined field arrays
 
 ## Customization
 
