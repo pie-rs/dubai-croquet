@@ -19,11 +19,11 @@ Every task or tightly scoped subtask must end with:
 
 ## Phase 1: Primitive Foundation
 
-- [ ] Install required shadcn primitives before section work: `accordion`, `sheet`, `select`, `checkbox`
-- [ ] Confirm existing primitives remain the base layer: `button`, `card`, `avatar`, `dialog`, `input`, `textarea`, `label`, `separator`, `badge`
-- [ ] Update docs to state "primitives first, then composed site components"
-- [ ] **Verify**: imports resolve and app still builds after primitive additions
-- [ ] **Commit**: `chore: add required shadcn primitives for migration`
+- [x] Install required shadcn primitives before section work: `accordion`, `sheet`, `select`, `checkbox`
+- [x] Confirm existing primitives remain the base layer: `button`, `card`, `avatar`, `dialog`, `input`, `textarea`, `label`, `separator`, `badge`
+- [x] Update docs to state "primitives first, then composed site components"
+- [x] **Verify**: imports resolve and app still builds after primitive additions
+- [x] **Commit**: `chore: add required shadcn primitives for migration`
 
 ## Phase 2: Design Token Recreation
 
