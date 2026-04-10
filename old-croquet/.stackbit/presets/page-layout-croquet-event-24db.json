@@ -1,0 +1,95 @@
+{
+    "model": "PageLayout",
+    "srcType": "git",
+    "srcProjectId": "pie-rs/dubai-croquet-2f0f6",
+    "presets": [
+        {
+            "label": "Croquet Event",
+            "locale": null,
+            "metadata": {
+                "categories": [
+                    "eveny"
+                ],
+                "canDelete": true
+            },
+            "data": {
+                "title": "The Clements Cup 2023 Season Opener",
+                "sections": [
+                    {
+                        "elementId": "",
+                        "colors": "colors-h",
+                        "title": "The 2023 Dubai Croquet Clements Cup",
+                        "subtitle": "Brought to you by PIMMS and Frosé.",
+                        "badge": {
+                            "label": "The biggest thing since biggy smalls",
+                            "elementId": "",
+                            "styles": {
+                                "self": {
+                                    "textAlign": "left"
+                                }
+                            },
+                            "$$type": "Badge"
+                        },
+                        "text": "It's the event of the season. Never mind the FA cup, the Superbowl, or the holy grail.  They are ***NOTHING*** compared to the splendor and allure to the sporting gentleperson that is\n\n<div style=\"text-align: center\">### THE CLEMENTS CUP</div>\n\n<div style=\"text-align: center\"></div>\n\n<div style=\"text-align: center\"></div>\n\nTensions will be running high, at this season's opener.  Our gallant and humble captain will be defending his (yes, and this team's) glorious title as the undefeated, the undisputed, Dubailand/the world champion Crouqet GOAT.\n\nCome and be seen along with everyone who is anyone at Dubai's greatest social and sporting event since Jay-z's missus did a thing at\nsome gaff on the palm recently.\n\nExtra points for looking fabulous.\n\nThere will no doubt be cucumber sandwiches, scones, and iced tea back at the clubhouse where young smithers will no doubt be on the grammar-phone, laying down some sick grooves.\n\n**Mallet off @ 15:30 Safa Park by the big tree.**\n\nCome play with our balls. [Register your interest with the committee NOW!](/player-registration)\n\nRules are subject to change. Terms & Conditions will apply, ritual sacrifice may be required. The captain's word is final.\n",
+                        "actions": [
+                            {
+                                "label": "Sign Me Up Baby!",
+                                "altText": "player registration button",
+                                "url": "/player-registration",
+                                "showIcon": null,
+                                "icon": null,
+                                "iconPosition": null,
+                                "style": "secondary",
+                                "elementId": null,
+                                "$$type": "Button"
+                            }
+                        ],
+                        "media": {
+                            "url": "/images/trophy2.jpg",
+                            "altText": "Hero image",
+                            "caption": null,
+                            "elementId": null,
+                            "styles": null,
+                            "$$type": "ImageBlock"
+                        },
+                        "styles": {
+                            "self": {
+                                "height": "auto",
+                                "width": "wide",
+                                "margin": [
+                                    "mt-0",
+                                    "mb-0",
+                                    "ml-0",
+                                    "mr-0"
+                                ],
+                                "padding": [
+                                    "pt-12",
+                                    "pb-12",
+                                    "pl-4",
+                                    "pr-4"
+                                ],
+                                "alignItems": "center",
+                                "justifyContent": "center",
+                                "flexDirection": "col"
+                            },
+                            "title": {
+                                "textAlign": "left"
+                            },
+                            "subtitle": {
+                                "textAlign": "left"
+                            },
+                            "text": {
+                                "textAlign": "left"
+                            },
+                            "actions": {
+                                "justifyContent": "flex-start"
+                            }
+                        },
+                        "$$type": "HeroSection"
+                    }
+                ]
+            },
+            "thumbnail": "images/page-layout-croquet-event-24db.png"
+        }
+    ]
+}
