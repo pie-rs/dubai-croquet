@@ -1,5 +1,6 @@
 'use client'
 
+import { startTransition, useState } from 'react'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
@@ -59,12 +60,16 @@ type FormField =
 type FormDefinition = {
   submitLabel: string
   description?: string
+  endpoint: string
+  successMessage: string
   fields: FormField[]
 }
 
 const formDefinitions: Record<NonNullable<ContactSectionData['formKey']>, FormDefinition> = {
   contact: {
     submitLabel: 'Send Message',
+    endpoint: '/api/contact',
+    successMessage: 'Your message has been sent.',
     fields: [
       { kind: 'text', name: 'name', label: 'Name', placeholder: 'Your name', required: true, width: 'half' },
       { kind: 'email', name: 'email', label: 'Email', placeholder: 'Your email', required: true, width: 'half' },
@@ -74,12 +79,16 @@ const formDefinitions: Record<NonNullable<ContactSectionData['formKey']>, FormDe
   },
   newsletter: {
     submitLabel: 'Sign Up',
+    endpoint: '/api/newsletter',
+    successMessage: 'You have been added to the newsletter list.',
     fields: [
       { kind: 'email', name: 'email', label: 'Email', placeholder: 'Your email', required: true, width: 'full' },
     ],
   },
   registration: {
     submitLabel: 'Submit Registration',
+    endpoint: '/api/registration',
+    successMessage: 'Your registration has been submitted.',
     fields: [
       { kind: 'text', name: 'name', label: 'Name', placeholder: 'Fighting Name', required: true, width: 'half' },
       { kind: 'email', name: 'email', label: 'Email', placeholder: 'Your email', width: 'half' },
@@ -155,6 +164,50 @@ function FieldShell({
 export function ContactSection({ colors, width, title, subtitle, text, formKey, variant, media }: ContactSectionData) {
   const form = getFormDefinition(formKey)
   const centeredLayout = variant === 'variant-b' && !media?.src
+  const [values, setValues] = useState<Record<string, string | boolean>>({})
+  const [submitState, setSubmitState] = useState<{
+    status: 'idle' | 'submitting' | 'success' | 'error'
+    message?: string
+  }>({ status: 'idle' })
+
+  function setFieldValue(name: string, value: string | boolean) {
+    setValues((current) => ({ ...current, [name]: value }))
+  }
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    setSubmitState({ status: 'submitting' })
+
+    const payload = Object.fromEntries(
+      form.fields.map((field) => [field.name, values[field.name] ?? (field.kind === 'checkbox' ? false : '')]),
+    )
+
+    try {
+      const response = await fetch(form.endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      })
+
+      const body = (await response.json().catch(() => ({}))) as { error?: string; message?: string }
+
+      if (!response.ok) {
+        throw new Error(body.error ?? 'Unable to submit the form right now.')
+      }
+
+      startTransition(() => {
+        setSubmitState({ status: 'success', message: body.message ?? form.successMessage })
+        setValues({})
+      })
+    } catch (error) {
+      setSubmitState({
+        status: 'error',
+        message: error instanceof Error ? error.message : 'Unable to submit the form right now.',
+      })
+    }
+  }
 
   return (
     <SectionShell colors={colors} width={width}>
@@ -178,13 +231,21 @@ export function ContactSection({ colors, width, title, subtitle, text, formKey, 
               {form.description ? <p className="text-sm text-muted-foreground">{form.description}</p> : null}
             </CardHeader>
             <CardContent className="px-5 py-5">
-              <form className="grid gap-4 sm:grid-cols-2">
+              <form className="grid gap-4 sm:grid-cols-2" onSubmit={handleSubmit}>
                 {form.fields.map((field) => {
                   if (field.kind === 'checkbox') {
+                    const checked = values[field.name] === true
+
                     return (
                       <div key={field.name} className="sm:col-span-2">
                         <div className="flex items-start gap-3">
-                          <Checkbox id={field.name} name={field.name} className="mt-1" />
+                          <Checkbox
+                            id={field.name}
+                            name={field.name}
+                            className="mt-1"
+                            checked={checked}
+                            onCheckedChange={(checked) => setFieldValue(field.name, checked === true)}
+                          />
                           <Label htmlFor={field.name} className="text-sm leading-6 font-normal">
                             {field.label}
                           </Label>
@@ -194,6 +255,8 @@ export function ContactSection({ colors, width, title, subtitle, text, formKey, 
                   }
 
                   if (field.kind === 'select') {
+                    const currentValue = values[field.name]
+
                     return (
                       <div
                         key={field.name}
@@ -202,7 +265,12 @@ export function ContactSection({ colors, width, title, subtitle, text, formKey, 
                         <Label className="text-sm uppercase tracking-[0.16em]" htmlFor={field.name}>
                           {field.label}
                         </Label>
-                        <Select name={field.name} required={field.required}>
+                        <Select
+                          name={field.name}
+                          required={field.required}
+                          value={typeof currentValue === 'string' ? currentValue : ''}
+                          onValueChange={(value) => setFieldValue(field.name, value ?? '')}
+                        >
                           <SelectTrigger id={field.name} className="w-full">
                             <SelectValue placeholder={field.placeholder ?? field.label} />
                           </SelectTrigger>
@@ -219,6 +287,8 @@ export function ContactSection({ colors, width, title, subtitle, text, formKey, 
                   }
 
                   if (field.kind === 'textarea') {
+                    const currentValue = values[field.name]
+
                     return (
                       <FieldShell key={field.name} id={field.name} label={field.label} width={field.width}>
                         <Textarea
@@ -227,10 +297,14 @@ export function ContactSection({ colors, width, title, subtitle, text, formKey, 
                           required={field.required}
                           placeholder={field.placeholder}
                           className="min-h-32"
+                          value={typeof currentValue === 'string' ? currentValue : ''}
+                          onChange={(event) => setFieldValue(field.name, event.target.value)}
                         />
                       </FieldShell>
                     )
                   }
+
+                  const currentValue = values[field.name]
 
                   return (
                     <FieldShell key={field.name} id={field.name} label={field.label} width={field.width}>
@@ -241,14 +315,31 @@ export function ContactSection({ colors, width, title, subtitle, text, formKey, 
                         required={field.required}
                         placeholder={field.placeholder}
                         autoComplete={field.autoComplete}
+                        value={typeof currentValue === 'string' ? currentValue : ''}
+                        onChange={(event) => setFieldValue(field.name, event.target.value)}
                       />
                     </FieldShell>
                   )
                 })}
 
+                {submitState.message ? (
+                  <div
+                    className={cn(
+                      'sm:col-span-2 text-sm',
+                      submitState.status === 'error' ? 'text-destructive' : 'text-muted-foreground',
+                    )}
+                  >
+                    {submitState.message}
+                  </div>
+                ) : null}
+
                 <div className="sm:col-span-2 pt-2">
-                  <Button className="w-full rounded-none uppercase tracking-[0.16em]" type="submit">
-                    {form.submitLabel}
+                  <Button
+                    className="w-full rounded-none uppercase tracking-[0.16em]"
+                    type="submit"
+                    disabled={submitState.status === 'submitting'}
+                  >
+                    {submitState.status === 'submitting' ? 'Sending...' : form.submitLabel}
                   </Button>
                 </div>
               </form>

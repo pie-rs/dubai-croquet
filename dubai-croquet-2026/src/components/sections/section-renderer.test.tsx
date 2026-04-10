@@ -2,9 +2,9 @@
 // @vitest-environment jsdom
 
 import '@testing-library/jest-dom/vitest'
-import { cleanup, fireEvent, render, screen } from '@testing-library/react'
+import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import type { AnchorHTMLAttributes, ImgHTMLAttributes } from 'react'
-import { afterEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { FeatureHighlightSection } from '@/components/sections/feature-highlight-section'
 import { ContactSection } from '@/components/sections/contact-section'
 import { FeaturedItemsSection } from '@/components/sections/featured-items-section'
@@ -69,6 +69,10 @@ vi.mock('next/image', () => ({
 
 afterEach(() => {
   cleanup()
+})
+
+beforeEach(() => {
+  vi.restoreAllMocks()
 })
 
 describe('narrative sections', () => {
@@ -172,6 +176,38 @@ describe('narrative sections', () => {
     expect(screen.getByLabelText('Message')).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Send Message' })).toBeInTheDocument()
     expect(screen.getByAltText('Contact form image')).toBeInTheDocument()
+  })
+
+  it('submits newsletter forms to the matching api route', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ message: 'Added to the list.' }),
+    })
+    vi.stubGlobal('fetch', fetchMock)
+
+    render(
+      <ContactSection
+        _template="contactSection"
+        colors="colors-f"
+        width="wide"
+        title="Newsletter"
+        text="Sign up now."
+        formKey="newsletter"
+      />,
+    )
+
+    fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'hello@example.com' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Sign Up' }))
+
+    await waitFor(() =>
+      expect(fetchMock).toHaveBeenCalledWith('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: 'hello@example.com' }),
+      }),
+    )
+
+    expect(await screen.findByText('Added to the list.')).toBeInTheDocument()
   })
 
   it('renders featured items with images and calls to action', () => {

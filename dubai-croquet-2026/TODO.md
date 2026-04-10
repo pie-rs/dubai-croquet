@@ -122,15 +122,15 @@ Every task or tightly scoped subtask must end with:
 
 ## Phase 8: Forms and Handlers
 
-- [ ] Create code-owned form definitions for `contact`, `newsletter`, and `registration`
-- [ ] Create `src/app/api/contact/route.ts`
-- [ ] Create `src/app/api/newsletter/route.ts`
-- [ ] Create `src/app/api/registration/route.ts`
-- [ ] Wire `contactSection` to select the correct code-owned form via `formKey`
-- [ ] Validate all form payloads with Zod
-- [ ] **Test**: unit tests for form schemas
-- [ ] **Test**: API route tests for valid and invalid payloads
-- [ ] **Test**: component tests for correct form selection by `formKey`
+- [x] Create code-owned form definitions for `contact`, `newsletter`, and `registration`
+- [x] Create `src/app/api/contact/route.ts`
+- [x] Create `src/app/api/newsletter/route.ts`
+- [x] Create `src/app/api/registration/route.ts`
+- [x] Wire `contactSection` to select the correct code-owned form via `formKey`
+- [x] Validate all form payloads with Zod
+- [x] **Test**: unit tests for form schemas
+- [x] **Test**: API route tests for valid and invalid payloads
+- [x] **Test**: component tests for correct form selection by `formKey`
 - [ ] **Commit**: `feat: add public forms and validated route handlers`
 
 ## Phase 9: Verification and Fidelity

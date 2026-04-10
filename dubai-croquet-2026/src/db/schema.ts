@@ -1,20 +1,23 @@
-// ─── Database Schema ───
-//
-// Define your application tables here using Drizzle ORM.
-// After adding tables, run:
-//   npx drizzle-kit generate   # create migration
-//   npx drizzle-kit migrate    # apply migration
-//
-// Example:
-//
-// import { pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core'
-// import { sql } from 'drizzle-orm'
-//
-// export const projects = pgTable('projects', {
-//   id: uuid('id').default(sql`gen_random_uuid()`).primaryKey(),
-//   ownerUserId: uuid('owner_user_id').notNull(),
-//   name: text('name').notNull(),
-//   createdAt: timestamp('created_at').defaultNow().notNull(),
-// })
+import { index, jsonb, pgEnum, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core'
 
-export {}
+export const formSubmissionType = pgEnum('form_submission_type', [
+  'contact',
+  'newsletter',
+  'registration',
+])
+
+export const formSubmissions = pgTable(
+  'form_submissions',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    formType: formSubmissionType('form_type').notNull(),
+    name: text('name'),
+    email: text('email'),
+    payload: jsonb('payload').$type<Record<string, unknown>>().notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => ({
+    formTypeIndex: index('form_submissions_form_type_idx').on(table.formType),
+    createdAtIndex: index('form_submissions_created_at_idx').on(table.createdAt),
+  }),
+)

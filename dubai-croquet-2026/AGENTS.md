@@ -236,3 +236,7 @@ These can stay empty during local schema and contract work. They become required
 When wiring Tina Cloud, prefer `NEXT_PUBLIC_TINA_BRANCH` over platform branch env detection so local and deployed admin builds point at the same content branch.
 
 Existing (Supabase, Sentry) - see `.env.example`
+
+Form persistence uses `DATABASE_URL` when available and stores submissions in
+the `form_submissions` table. If `DATABASE_URL` is missing, the form handlers
+return `503` instead of crashing.
