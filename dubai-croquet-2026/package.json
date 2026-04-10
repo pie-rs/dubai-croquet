@@ -8,6 +8,7 @@
     "tina:dev": "tinacms dev -c \"next dev\"",
     "build": "next build",
     "tina:build": "tinacms build --skip-cloud-checks",
+    "migrate:legacy-content": "tsx scripts/migrate-legacy-content.ts",
     "start": "next start",
     "lint": "eslint src tina drizzle.config.ts next.config.ts playwright.config.ts vitest.config.ts eslint.config.mjs postcss.config.mjs",
     "format": "prettier --write .",

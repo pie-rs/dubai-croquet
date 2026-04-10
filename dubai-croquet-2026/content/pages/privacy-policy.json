@@ -1,0 +1,13 @@
+{
+  "title": "Privacy Policy",
+  "slug": "privacy-policy",
+  "sections": [
+    {
+      "_template": "textSection",
+      "colors": "colors-f",
+      "width": "wide",
+      "title": "Privacy Policy",
+      "body": "1.  asdf\n\n2.  asdf\n\n3.  asdf"
+    }
+  ]
+}

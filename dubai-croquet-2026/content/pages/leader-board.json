@@ -1,0 +1,38 @@
+{
+  "title": "Leader Board",
+  "slug": "leader-board",
+  "sections": [
+    {
+      "_template": "heroSection",
+      "colors": "colors-a",
+      "width": "wide",
+      "title": "Winner, Winner, Chicken Dinner",
+      "badgeLabel": "dubai clements cup world champions",
+      "text": "A fabulous team effort, led by the unimpeachable, the shy, the understated, the demure Captain, Our Captain.",
+      "media": {
+        "src": "/images/the-captain.jpg",
+        "alt": "Hero image"
+      }
+    },
+    {
+      "_template": "featuredItemsSection",
+      "colors": "colors-h",
+      "title": "Leader Board",
+      "columns": 1,
+      "items": [
+        {
+          "title": "First Place",
+          "text": "#### The Captain\n\nand his team."
+        },
+        {
+          "title": "First Loser",
+          "text": "#### Ben and his whole team."
+        },
+        {
+          "title": "Second Loser",
+          "text": "#### There can be only one."
+        }
+      ]
+    }
+  ]
+}

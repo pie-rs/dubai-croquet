@@ -1,0 +1,19 @@
+{
+  "title": "Contact Us",
+  "slug": "contact-us",
+  "sections": [
+    {
+      "_template": "contactSection",
+      "colors": "colors-h",
+      "width": "wide",
+      "title": "Contact us",
+      "text": "We look forward to hearing from you.",
+      "formKey": "contact",
+      "variant": "variant-a",
+      "media": {
+        "src": "/images/strategy-under-the-tree.jpg",
+        "alt": "Contact form image"
+      }
+    }
+  ]
+}

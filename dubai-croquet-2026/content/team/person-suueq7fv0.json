@@ -1,0 +1,10 @@
+{
+  "firstName": "Tina",
+  "lastName": "C",
+  "role": "Stylist in Residence",
+  "bio": "If anyone can wear man made fibers in April in Dubai it's Tina.  And she'll look amazing doing it.",
+  "image": {
+    "src": "/images/tina-fabulous-picnic.jpg",
+    "alt": "Person photo"
+  }
+}

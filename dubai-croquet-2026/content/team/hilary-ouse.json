@@ -1,0 +1,11 @@
+{
+  "firstName": "Ben",
+  "lastName": "F ",
+  "role": "Words and Mumbling",
+  "bio": "Looks a bit like Jeff Bezos before the steroids.  \n\nCo-Loser of the 2021 Clements Cup.",
+  "image": {
+    "src": "/images/ben.jpg",
+    "alt": "altText of the image",
+    "caption": "Caption of the image"
+  }
+}

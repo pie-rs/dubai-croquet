@@ -59,18 +59,19 @@ Every task or tightly scoped subtask must end with:
 
 ## Phase 4: Content and Media Migration
 
-- [ ] Migrate legacy config content into `content/site/config.json`
-- [ ] Migrate team JSON into `content/team`
-- [ ] Migrate public pages into `content/pages`
-- [ ] Migrate all legacy blog posts into `content/posts`
-- [ ] Preserve exact legacy slugs and historical post dates
-- [ ] Mirror externally hosted inline blog images into local assets
-- [ ] Rewrite blog markdown image references to local paths
-- [ ] Clean malformed markdown only where needed for correct rendering
-- [ ] Update docs with migration assumptions and asset conventions
-- [ ] **Test**: content fixture tests for migrated route slugs
-- [ ] **Test**: blog metadata tests for date, slug, featured image, optional author, bottom sections
-- [ ] **Commit**: `feat: migrate legacy content and blog media`
+- [x] Migrate legacy config content into `content/site/config.json`
+- [x] Migrate team JSON into `content/team`
+- [x] Migrate public pages into `content/pages`
+- [x] Migrate all legacy blog posts into `content/posts`
+- [x] Keep JSON-backed page/config/team copy as markdown strings; keep blog posts in MDX
+- [x] Preserve exact legacy slugs and historical post dates
+- [x] Mirror externally hosted inline blog images into local assets
+- [x] Rewrite blog markdown image references to local paths
+- [x] Clean malformed markdown only where needed for correct rendering
+- [x] Update docs with migration assumptions and asset conventions
+- [x] **Test**: content fixture tests for migrated route slugs
+- [x] **Test**: blog metadata tests for date, slug, featured image, optional author, bottom sections
+- [x] **Commit**: `feat: migrate legacy content and blog media`
 
 ## Phase 5: Public Layout Shell
 

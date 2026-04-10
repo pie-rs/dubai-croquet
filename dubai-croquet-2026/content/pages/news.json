@@ -1,0 +1,26 @@
+{
+  "title": "News",
+  "slug": "news",
+  "sections": [
+    {
+      "_template": "recentPostsSection",
+      "colors": "colors-a",
+      "title": "What is even happening?",
+      "subtitle": "All the latest news on the Dubai Croquet scene",
+      "variant": "variant-a",
+      "recentCount": 9,
+      "showDate": false,
+      "showAuthor": false,
+      "showExcerpt": false,
+      "actions": [
+        {
+          "label": "View All",
+          "url": "/news",
+          "style": "primary",
+          "showIcon": false,
+          "icon": "arrowRightCircle"
+        }
+      ]
+    }
+  ]
+}

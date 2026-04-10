@@ -1,0 +1,38 @@
+{
+  "title": "Gallery",
+  "slug": "gallery",
+  "sections": [
+    {
+      "_template": "mediaGallerySection",
+      "colors": "colors-a",
+      "title": "Gallery",
+      "subtitle": "Some Dubai Croquet Club Memories",
+      "images": [
+        {
+          "src": "/images/tina-shooting-hoops.jpg",
+          "alt": "Fashion icon playing croquet"
+        },
+        {
+          "src": "/images/long-distance-hywell.jpg",
+          "alt": "Man in red socks in the park"
+        },
+        {
+          "src": "/images/claire-walking-away.jpg",
+          "alt": "stylish woman playing croquet"
+        },
+        {
+          "src": "/images/capain-from-afar.jpg",
+          "alt": "People watching a croquet champion"
+        },
+        {
+          "src": "/images/tina-fabulous-picnic.jpg",
+          "alt": "Style icon at a picnic"
+        },
+        {
+          "src": "/images/ben-claire-hywell.jpg",
+          "alt": "Fashionable Dubai people at the croquet"
+        }
+      ]
+    }
+  ]
+}

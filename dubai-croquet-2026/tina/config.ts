@@ -33,11 +33,22 @@ const imageFields: TinaField[] = [
   { type: 'string', name: 'caption', label: 'Caption', required: false },
 ]
 
-const imageField = (name: string, label: string): TinaField => ({
+const imageField = (name: string, label: string, required = false): TinaField => ({
   type: 'object',
   name,
   label,
+  required,
   fields: [...imageFields],
+})
+
+const markdownStringField = (name: string, label: string, required = true): TinaField => ({
+  type: 'string',
+  name,
+  label,
+  required,
+  ui: {
+    component: 'textarea',
+  },
 })
 
 const linkFields: TinaField[] = [
@@ -67,7 +78,8 @@ const sectionTemplates: Template[] = [
       widthField,
       { type: 'string', name: 'title', label: 'Title' },
       { type: 'string', name: 'subtitle', label: 'Subtitle', required: false },
-      { type: 'rich-text', name: 'text', label: 'Text', required: false },
+      { type: 'string', name: 'badgeLabel', label: 'Badge Label', required: false },
+      markdownStringField('text', 'Text', false),
       {
         type: 'object',
         name: 'actions',
@@ -86,7 +98,7 @@ const sectionTemplates: Template[] = [
       widthField,
       { type: 'string', name: 'title', label: 'Title', required: false },
       { type: 'string', name: 'subtitle', label: 'Subtitle', required: false },
-      { type: 'rich-text', name: 'body', label: 'Body' },
+      markdownStringField('body', 'Body'),
     ],
   },
   {
@@ -96,7 +108,7 @@ const sectionTemplates: Template[] = [
       colorField,
       widthField,
       { type: 'string', name: 'title', label: 'Title' },
-      { type: 'rich-text', name: 'text', label: 'Text' },
+      markdownStringField('text', 'Text', false),
       {
         type: 'object',
         name: 'actions',
@@ -126,9 +138,24 @@ const sectionTemplates: Template[] = [
         list: true,
         fields: [
           { type: 'string', name: 'title', label: 'Title' },
-          { type: 'rich-text', name: 'text', label: 'Text' },
+          { type: 'string', name: 'subtitle', label: 'Subtitle', required: false },
+          markdownStringField('text', 'Text', false),
           imageField('featuredImage', 'Featured Image'),
+          {
+            type: 'object',
+            name: 'actions',
+            label: 'Actions',
+            list: true,
+            fields: [...linkFields],
+          },
         ],
+      },
+      {
+        type: 'object',
+        name: 'actions',
+        label: 'Section Actions',
+        list: true,
+        fields: [...linkFields],
       },
     ],
   },
@@ -137,13 +164,16 @@ const sectionTemplates: Template[] = [
     label: 'Testimonials Section',
     fields: [
       colorField,
+      { type: 'string', name: 'title', label: 'Title', required: false },
+      { type: 'string', name: 'subtitle', label: 'Subtitle', required: false },
+      { type: 'string', name: 'variant', label: 'Variant', required: false },
       {
         type: 'object',
         name: 'testimonials',
         label: 'Testimonials',
         list: true,
         fields: [
-          { type: 'rich-text', name: 'quote', label: 'Quote' },
+          markdownStringField('quote', 'Quote'),
           { type: 'string', name: 'name', label: 'Name' },
           { type: 'string', name: 'title', label: 'Title', required: false },
           imageField('image', 'Image'),
@@ -158,7 +188,8 @@ const sectionTemplates: Template[] = [
       colorField,
       widthField,
       { type: 'string', name: 'title', label: 'Title' },
-      { type: 'rich-text', name: 'text', label: 'Text', required: false },
+      markdownStringField('text', 'Text', false),
+      imageField('media', 'Media'),
       {
         type: 'string',
         name: 'formKey',
@@ -190,7 +221,7 @@ const sectionTemplates: Template[] = [
         list: true,
         fields: [
           { type: 'string', name: 'question', label: 'Question' },
-          { type: 'rich-text', name: 'answer', label: 'Answer' },
+          markdownStringField('answer', 'Answer'),
         ],
       },
     ],
@@ -201,8 +232,9 @@ const sectionTemplates: Template[] = [
     fields: [
       colorField,
       widthField,
-      { type: 'rich-text', name: 'quote', label: 'Quote' },
-      { type: 'string', name: 'attribution', label: 'Attribution', required: false },
+      markdownStringField('quote', 'Quote'),
+      { type: 'string', name: 'name', label: 'Name', required: false },
+      { type: 'string', name: 'title', label: 'Title', required: false },
     ],
   },
   {
@@ -211,6 +243,7 @@ const sectionTemplates: Template[] = [
     fields: [
       colorField,
       { type: 'string', name: 'title', label: 'Title', required: false },
+      { type: 'string', name: 'subtitle', label: 'Subtitle', required: false },
       {
         type: 'object',
         name: 'images',
@@ -226,6 +259,15 @@ const sectionTemplates: Template[] = [
     fields: [
       colorField,
       { type: 'string', name: 'title', label: 'Title', required: false },
+      { type: 'string', name: 'subtitle', label: 'Subtitle', required: false },
+      { type: 'string', name: 'variant', label: 'Variant', required: false },
+      {
+        type: 'object',
+        name: 'actions',
+        label: 'Actions',
+        list: true,
+        fields: [...linkFields],
+      },
       {
         type: 'object',
         name: 'people',
@@ -243,7 +285,8 @@ const sectionTemplates: Template[] = [
       widthField,
       { type: 'string', name: 'title', label: 'Title' },
       { type: 'string', name: 'subtitle', label: 'Subtitle', required: false },
-      { type: 'rich-text', name: 'text', label: 'Text' },
+      { type: 'string', name: 'badgeLabel', label: 'Badge Label', required: false },
+      markdownStringField('text', 'Text', false),
       imageField('media', 'Media'),
       {
         type: 'object',
@@ -261,10 +304,18 @@ const sectionTemplates: Template[] = [
       colorField,
       { type: 'string', name: 'title', label: 'Title' },
       { type: 'string', name: 'subtitle', label: 'Subtitle', required: false },
+      { type: 'string', name: 'variant', label: 'Variant', required: false },
       { type: 'number', name: 'recentCount', label: 'Post Count' },
       { type: 'boolean', name: 'showDate', label: 'Show Date', required: false },
       { type: 'boolean', name: 'showAuthor', label: 'Show Author', required: false },
       { type: 'boolean', name: 'showExcerpt', label: 'Show Excerpt', required: false },
+      {
+        type: 'object',
+        name: 'actions',
+        label: 'Actions',
+        list: true,
+        fields: [...linkFields],
+      },
     ],
   },
 ] 
@@ -344,7 +395,7 @@ const collections: Collection[] = [
               { type: 'string', name: 'icon', label: 'Icon', required: false },
             ],
           },
-          { type: 'rich-text', name: 'copyrightText', label: 'Copyright Text', required: false },
+          markdownStringField('copyrightText', 'Copyright Text', false),
         ],
       },
     ],
@@ -410,7 +461,7 @@ const collections: Collection[] = [
       { type: 'string', name: 'firstName', label: 'First Name' },
       { type: 'string', name: 'lastName', label: 'Last Name', required: false },
       { type: 'string', name: 'role', label: 'Role', required: false },
-      { type: 'rich-text', name: 'bio', label: 'Bio', required: false },
+      markdownStringField('bio', 'Bio', false),
       imageField('image', 'Image'),
     ],
   },

@@ -1,0 +1,21 @@
+{
+  "title": "Player Registration",
+  "slug": "player-registration",
+  "sections": [
+    {
+      "_template": "contactSection",
+      "colors": "colors-h",
+      "width": "narrow",
+      "title": "2023 Clements Cup Player Registration",
+      "text": "You've limbered up. You look fine in white. You've sharpened your blades and your wit. You're so ready baby.\n\nYou're signing up to play aren't you, you cheeky monkey?\n\nGo on, doooowit:",
+      "formKey": "registration",
+      "variant": "variant-a"
+    },
+    {
+      "_template": "textSection",
+      "colors": "colors-a",
+      "width": "wide",
+      "body": "1.  Yes you may attend and not play, however, you will be spurned and quite possibly smited\n\n2.  No white is not compulsory attire. Please refer to point one for summary judgement\n\n3.  No, you may not wear a captains hat, unless it's a good one\n\n4.  The rules are subject to change and may be made up as we go along\n\n5.  All services are subject to a no-knowledge fee of ZERO AED\n\n6.  If you are a national newspaper that rhymes with Dolph Hughes, could you reprint this list with confusing images in as complicated legalese as possible? You ThAnK\n\n7.  Still confused?  Drop us a WhatsApp snowflake, we've got you."
+    }
+  ]
+}

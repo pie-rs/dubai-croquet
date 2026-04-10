@@ -1,0 +1,58 @@
+{
+  "title": "About Us",
+  "slug": "about-us",
+  "sections": [
+    {
+      "_template": "featureHighlightSection",
+      "colors": "colors-a",
+      "width": "wide",
+      "title": "Who Is Behind The Dubai Croquet Club?",
+      "badgeLabel": "Serious. professional. sportspeople.",
+      "text": "Founding the Dubai Croquet Club is the culmination of many minutes of WhatsApp voice notes, the occasional trip to MMI and some last minute Amazon orders.",
+      "media": {
+        "src": "/images/ben-running.jpg",
+        "alt": "Hero image"
+      },
+      "actions": [
+        {
+          "label": "Sign Up",
+          "url": "/contact-us",
+          "style": "primary"
+        }
+      ]
+    },
+    {
+      "_template": "featuredPeopleSection",
+      "colors": "colors-f",
+      "title": "About us",
+      "subtitle": "Founding Dubai Croquet Club Committee Members",
+      "variant": "variant-b",
+      "people": [
+        {
+          "person": "team/desmond-eagle.json"
+        },
+        {
+          "person": "team/person-b7rybasni.json"
+        },
+        {
+          "person": "team/dianne-ameter.json"
+        },
+        {
+          "person": "team/hilary-ouse.json"
+        },
+        {
+          "person": "team/person-suueq7fv0.json"
+        },
+        {
+          "person": "team/person-yn34ntfi7.json"
+        },
+        {
+          "person": "team/hugh-saturation.json"
+        },
+        {
+          "person": "team/person-n413pmsg5.json"
+        }
+      ]
+    }
+  ]
+}

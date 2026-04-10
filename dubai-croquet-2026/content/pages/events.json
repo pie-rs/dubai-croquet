@@ -1,0 +1,47 @@
+{
+  "title": "Events",
+  "slug": "events",
+  "sections": [
+    {
+      "_template": "featuredItemsSection",
+      "colors": "colors-h",
+      "title": "2023 Dubai Croquet Events",
+      "columns": 1,
+      "actions": [
+        {
+          "label": "I'm all over it, sign me up!",
+          "url": "/player-registration",
+          "style": "secondary",
+          "showIcon": false,
+          "icon": "arrowRight"
+        }
+      ],
+      "items": [
+        {
+          "title": "The 2023 Clements Cup - Season Opener",
+          "subtitle": "February 18th",
+          "text": "<div style=\"text-align: center\">[It's the big one. ](/dubai-croquet-2023-clements-cup-season-opener)</div>\n\n<div style=\"text-align: center\">[The Dubai Croquet 2023 Clements Cup Dubailand / The World Series Season Opener.](/dubai-croquet-2023-clements-cup-season-opener)</div>\n\n<div style=\"text-align: center\">[There will be blood.](/dubai-croquet-2023-clements-cup-season-opener)</div>",
+          "actions": [
+            {
+              "label": "Tell me more...",
+              "url": "/dubai-croquet-2023-clements-cup-season-opener",
+              "style": "link",
+              "showIcon": false,
+              "icon": "arrowRight"
+            }
+          ]
+        },
+        {
+          "title": "The 2023 Clements Cup - Round Two",
+          "subtitle": "March 18th",
+          "text": "The Big One Round Two - More points mean more prizes. Get in."
+        },
+        {
+          "title": "The Super Club",
+          "subtitle": "TBC",
+          "text": "Ending off the season with a hearty feast.\n\nLosers NFI. Sorry, not sorry."
+        }
+      ]
+    }
+  ]
+}

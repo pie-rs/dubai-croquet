@@ -25,26 +25,29 @@ async function main() {
 
 async function migrateConfig() {
   const legacyConfig = await readJson(path.join(oldContentRoot, 'data', 'config.json'))
+  const header = asRecord(legacyConfig.header)
+  const footer = asRecord(legacyConfig.footer)
+  const contacts = asRecord(footer?.contacts)
 
   const config = {
-    title: asString(legacyConfig.header?.title) ?? 'Dubai Croquet Club',
+    title: asString(header?.title) ?? 'Dubai Croquet Club',
     favicon: asString(legacyConfig.favicon) ?? '/images/dlcc-logo-1.ico',
     header: {
-      logo: mapImage(legacyConfig.header?.logo),
-      isTitleVisible: asBoolean(legacyConfig.header?.isTitleVisible),
-      primaryLinks: mapLinks(legacyConfig.header?.primaryLinks),
+      logo: mapImage(header?.logo),
+      isTitleVisible: asBoolean(header?.isTitleVisible),
+      primaryLinks: mapLinks(header?.primaryLinks),
     },
     footer: {
-      logo: mapImage(legacyConfig.footer?.logo),
+      logo: mapImage(footer?.logo),
       contacts: {
-        phoneNumber: asString(legacyConfig.footer?.contacts?.phoneNumber),
-        email: asString(legacyConfig.footer?.contacts?.email),
-        address: asString(legacyConfig.footer?.contacts?.address),
+        phoneNumber: asString(contacts?.phoneNumber),
+        email: asString(contacts?.email),
+        address: asString(contacts?.address),
       },
-      primaryLinks: mapLinks(legacyConfig.footer?.primaryLinks),
-      legalLinks: mapLinks(legacyConfig.footer?.legalLinks),
-      socialLinks: mapSocialLinks(legacyConfig.footer?.socialLinks),
-      copyrightText: normalizeText(asString(legacyConfig.footer?.copyrightText)),
+      primaryLinks: mapLinks(footer?.primaryLinks),
+      legalLinks: mapLinks(footer?.legalLinks),
+      socialLinks: mapSocialLinks(footer?.socialLinks),
+      copyrightText: normalizeText(asString(footer?.copyrightText)),
     },
   }
 
@@ -275,6 +278,8 @@ function mapSection(
   context: { teamReferenceMap: Map<string, string>; pageSlug: string },
 ) {
   const type = asString(section.type)
+  const badge = asRecord(section.badge)
+  const form = asRecord(section.form)
 
   switch (type) {
     case 'HeroSection':
@@ -284,7 +289,7 @@ function mapSection(
         width: extractWidth(section),
         title: asString(section.title),
         subtitle: asString(section.subtitle),
-        badgeLabel: asString(section.badge?.label),
+        badgeLabel: asString(badge?.label),
         text: normalizeText(asString(section.text)),
         actions: mapLinks(section.actions),
         media: mapImage(section.media),
@@ -349,7 +354,7 @@ function mapSection(
         title: asString(section.title),
         text: normalizeText(asString(section.text)),
         formKey: inferFormKey(section, context.pageSlug),
-        variant: asString(section.form?.variant),
+        variant: asString(form?.variant),
         media: mapImage(section.media),
       })
     case 'FaqSection':
@@ -403,7 +408,7 @@ function mapSection(
         width: extractWidth(section),
         title: asString(section.title),
         subtitle: asString(section.subtitle),
-        badgeLabel: asString(section.badge?.label),
+        badgeLabel: asString(badge?.label),
         text: normalizeText(asString(section.text)),
         media: mapImage(section.media),
         actions: mapLinks(section.actions),
@@ -431,7 +436,7 @@ function inferFormKey(section: LegacyRecord, pageSlug: string) {
     return 'registration'
   }
 
-  const destination = asString(section.form?.destination)?.toLowerCase()
+  const destination = asString(asRecord(section.form)?.destination)?.toLowerCase()
   if (destination?.includes('newsletter')) {
     return 'newsletter'
   }
@@ -506,7 +511,9 @@ function normalizeReferencePath(value: string) {
 }
 
 function extractWidth(section: LegacyRecord) {
-  return asString(section.styles?.self?.width) ?? 'wide'
+  const styles = asRecord(section.styles)
+  const self = asRecord(styles?.self)
+  return asString(self?.width) ?? 'wide'
 }
 
 function legacyPageSlugFromFilename(file: string) {

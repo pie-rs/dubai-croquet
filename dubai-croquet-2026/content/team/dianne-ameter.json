@@ -1,0 +1,11 @@
+{
+  "firstName": "Jolianne",
+  "lastName": "R",
+  "role": "Ladies Captain, Chattering and Social Silliness",
+  "bio": "Culinary godess, total bish, photographic wizard, watcher of terrible screechy lady shows & manager of dawg socials.\n\nShout out to [@FoxyRoxyDXB](https://instagram.com/foxyroxydxb)",
+  "image": {
+    "src": "/images/jolianne.jpg",
+    "alt": "altText of the image",
+    "caption": "Caption of the image"
+  }
+}

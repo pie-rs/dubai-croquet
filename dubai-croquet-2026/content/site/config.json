@@ -4,36 +4,128 @@
   "header": {
     "logo": {
       "src": "/images/dlcc-logo.webp",
-      "alt": "Dubai Croquet Club"
+      "alt": "Dubai Croquet Club",
+      "caption": "Caption of the image"
     },
     "isTitleVisible": true,
-    "primaryLinks": []
+    "primaryLinks": [
+      {
+        "label": "Home",
+        "url": "/",
+        "style": "link"
+      },
+      {
+        "label": "The Game",
+        "url": "/the-game",
+        "style": "link",
+        "showIcon": false,
+        "icon": "arrowRight"
+      },
+      {
+        "label": "Events",
+        "url": "/events",
+        "style": "link",
+        "showIcon": false,
+        "icon": "arrowRight"
+      },
+      {
+        "label": "Leader Board",
+        "url": "/leader-board",
+        "style": "link",
+        "showIcon": false,
+        "icon": "arrowRight"
+      },
+      {
+        "label": "FAQ",
+        "url": "/faq",
+        "style": "link"
+      },
+      {
+        "label": "News",
+        "url": "/news",
+        "style": "link"
+      },
+      {
+        "label": "Gallery",
+        "url": "/gallery",
+        "style": "link",
+        "showIcon": false,
+        "icon": "arrowRight"
+      },
+      {
+        "label": "About Us",
+        "url": "/about-us",
+        "style": "link",
+        "showIcon": false,
+        "icon": "arrowRight"
+      },
+      {
+        "label": "Contact Us",
+        "url": "/contact-us",
+        "style": "link",
+        "showIcon": false,
+        "icon": "arrowRight"
+      }
+    ]
   },
   "footer": {
     "logo": {
       "src": "/images/DCC-LOGO-COLOUR.svg",
-      "alt": "Dubai Croquet Club"
+      "alt": "Dubai Croquet Club Logo",
+      "caption": "Caption of the image"
     },
     "contacts": {
       "phoneNumber": "+971 50 760 8210",
       "email": "hello@dubaicroquet.com"
     },
-    "primaryLinks": [],
-    "legalLinks": [],
-    "socialLinks": [],
-    "copyrightText": {
-      "type": "root",
-      "children": [
-        {
-          "type": "p",
-          "children": [
-            {
-              "type": "text",
-              "text": "Copyright Dubai Croquet Club"
-            }
-          ]
-        }
-      ]
-    }
+    "primaryLinks": [
+      {
+        "label": "Home",
+        "url": "/",
+        "style": "link"
+      },
+      {
+        "label": "Links",
+        "url": "/links",
+        "style": "link"
+      },
+      {
+        "label": "player registration",
+        "url": "/player-registration",
+        "style": "link",
+        "showIcon": false,
+        "icon": "arrowRight"
+      }
+    ],
+    "legalLinks": [
+      {
+        "label": "Privacy Policy",
+        "url": "/",
+        "style": "link"
+      },
+      {
+        "label": "Terms & Conditions",
+        "url": "/termsandconditions",
+        "style": "link"
+      }
+    ],
+    "socialLinks": [
+      {
+        "label": "Twitter",
+        "url": "https://twitter.com/dubaicroquet",
+        "icon": "twitter"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://facebook.com/dubaicroquet",
+        "icon": "facebook"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/dubaicroquet/",
+        "icon": "instagram"
+      }
+    ],
+    "copyrightText": "Copyright [Dubai Croquet Club](https://www.dubaicroquet.com/) 2023"
   }
 }

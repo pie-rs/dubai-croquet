@@ -1,0 +1,13 @@
+{
+  "title": "Terms & Conditions",
+  "slug": "termsandconditions",
+  "sections": [
+    {
+      "_template": "textSection",
+      "colors": "colors-f",
+      "width": "wide",
+      "title": "Terms & Conditions",
+      "body": "1.  Please take everything on this site with a pinch of salt.  We love croquet but we are also just having a giggle.\n\n2.  If you are allergic to PIMMS or cucumber sandwiches this might not be the game for you.\n\n3.  On a serious note - we are fully inclusive, we will not tolerate any form of discrimination. Be nice."
+    }
+  ]
+}
