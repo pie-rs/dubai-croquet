@@ -224,10 +224,15 @@ Tests should be written alongside each task, not deferred to the end.
 Required for TinaCMS:
 
 ```
+NEXT_PUBLIC_TINA_BRANCH=main     # Usually your default content branch
 NEXT_PUBLIC_TINA_CLIENT_ID=   # From Tina Cloud dashboard
 TINA_TOKEN=                    # From Tina Cloud dashboard
+TINA_SEARCH_TOKEN=             # Optional, only if search/indexing is enabled
+NEXT_PUBLIC_SITE_URL=          # Local or deployed site URL for previews/admin flows
 ```
 
 These can stay empty during local schema and contract work. They become required once Tina Cloud editing is wired interactively.
+
+When wiring Tina Cloud, prefer `NEXT_PUBLIC_TINA_BRANCH` over platform branch env detection so local and deployed admin builds point at the same content branch.
 
 Existing (Supabase, Sentry) - see `.env.example`
