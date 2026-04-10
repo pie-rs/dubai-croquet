@@ -10,31 +10,29 @@ A production-grade Next.js starter template. Auth, database, background jobs, er
 
 This repo is being adapted into the Dubai Croquet Club website. Preserve the legacy public URLs, content, and overall layout/feel while using shadcn primitives as the implementation layer.
 
-Until the pnpm migration task is complete, some template commands may still reference `npm`/`npx`. Treat package-manager normalization as a first-class task, not an assumption.
-
 ## Dev Commands
 
 ```bash
-npm run dev            # Next.js dev server (Turbopack)
-npm run worker         # pg-boss background job worker (separate terminal)
-npm run build          # production build (standalone output)
-npm run lint           # ESLint
-npm run format         # Prettier format all
-npm run format:check   # Prettier check
-npm test               # Vitest
-npm run test:watch     # Vitest watch mode
-npm run check:circular # madge circular dependency check
-npx playwright test    # E2E auth flow tests (requires local Supabase + dev server)
+pnpm run dev                 # Next.js dev server (Turbopack)
+pnpm run worker              # pg-boss background job worker (separate terminal)
+pnpm run build               # production build (standalone output)
+pnpm run lint                # ESLint
+pnpm run format              # Prettier format all
+pnpm run format:check        # Prettier check
+pnpm test                    # Vitest
+pnpm run test:watch          # Vitest watch mode
+pnpm run check:circular      # madge circular dependency check
+pnpm exec playwright test    # E2E auth flow tests (requires local Supabase + dev server)
 ```
 
 ## Database Commands
 
 ```bash
-npx supabase start            # start local Supabase (requires Docker)
-npx supabase stop             # stop local Supabase
-npx supabase status           # show local URLs + keys
-npx drizzle-kit generate      # generate migration from schema changes
-npx drizzle-kit migrate       # apply pending migrations
+pnpm dlx supabase start       # start local Supabase (requires Docker)
+pnpm dlx supabase stop        # stop local Supabase
+pnpm dlx supabase status      # show local URLs + keys
+pnpm exec drizzle-kit generate # generate migration from schema changes
+pnpm exec drizzle-kit migrate  # apply pending migrations
 ```
 
 Local Supabase services:
@@ -59,7 +57,7 @@ Local Supabase services:
 ## Architecture — Two Processes
 
 1. **Next.js standalone web server** — serves pages and API Route Handlers
-2. **Worker process** (`npm run worker`) — pg-boss consumer for background jobs
+2. **Worker process** (`pnpm run worker`) — pg-boss consumer for background jobs
 
 Both processes connect to Supabase (Postgres, Auth, Storage).
 
@@ -113,6 +111,7 @@ Schema is at `src/db/schema.ts` — starts empty. Add your tables, run `drizzle-
   - one atomic git commit before moving on
 - Install required shadcn primitives before building composed site components that depend on them
 - Keep form schemas code-owned; use content-configured `formKey` values instead of CMS-defined field arrays
+- This package lives below the git root, so `prepare` intentionally skips Husky installation outside the repo root
 
 ## Customization
 

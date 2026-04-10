@@ -6,6 +6,7 @@
 - **Tone**: Playful, irreverent, social-sport club. Not corporate.
 - **Logo**: `/images/dlcc-logo.webp` (header), `/images/DCC-LOGO-COLOUR.svg` (footer)
 - **Favicon**: `/images/dlcc-logo-1.ico`
+- **Implementation rule**: preserve the legacy site's public feel and composition while using shadcn primitives as the underlying implementation layer
 
 ## Color Palette
 
@@ -67,12 +68,12 @@ Update `:root` in `globals.css`:
 
 ## Typography
 
-### Fonts (Template Defaults - Keep As-Is)
+### Fonts
 
 | Slot | Font | CSS Variable | Usage |
 |------|------|-------------|-------|
-| Display | Instrument Serif | `--font-display` | Hero headlines, decorative text |
-| Sans | DM Sans | `--font-sans` | Body text, UI elements, nav |
+| Display | Noto Sans Display | `--font-display` | Headlines and prominent callouts |
+| Sans | Poppins | `--font-sans` | Body text, UI elements, nav |
 | Mono | DM Mono | `--font-mono` | Code, technical content |
 
 ### Heading Scale
@@ -88,7 +89,7 @@ From the old site's style.json, applied to Tailwind classes:
 | H5 | xl | bold | `text-xl font-bold` |
 | H6 | lg | bold | `text-lg font-bold` |
 
-Hero headlines should use `font-display` (Instrument Serif). Body headings use `font-sans` (DM Sans).
+Hero headlines should follow the legacy site's sans-serif treatment rather than the template's serif defaults. Use shadcn components, but theme them to match the legacy site instead of inheriting template styling.
 
 ## Button Styles
 

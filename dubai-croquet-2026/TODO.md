@@ -7,15 +7,15 @@ Every task or tightly scoped subtask must end with:
 
 ## Phase 0: Tooling Baseline
 
-- [ ] Install pnpm globally if not present (`npm i -g pnpm`)
-- [ ] Run `pnpm import` to convert `package-lock.json` to `pnpm-lock.yaml`
-- [ ] Delete `package-lock.json`
+- [x] Install pnpm globally if not present (`npm i -g pnpm`)
+- [x] Run `pnpm import` to convert `package-lock.json` to `pnpm-lock.yaml`
+- [x] Delete `package-lock.json`
 - [ ] Add `.npmrc` only if TinaCMS requires hoisting
-- [ ] Run `pnpm install`
-- [ ] Update `.husky/pre-commit` and package scripts to use `pnpm`
-- [ ] Update `CLAUDE.md`, `AGENTS.md`, `TODO.md`, and `DESIGN.md` to match the actual package-manager and migration plan
-- [ ] **Verify**: `pnpm run lint`, `pnpm test`, `pnpm run check:circular`
-- [ ] **Commit**: `chore: migrate tooling to pnpm`
+- [x] Run `pnpm install`
+- [x] Update `.husky/pre-commit` and package scripts to use `pnpm`
+- [x] Update `CLAUDE.md`, `AGENTS.md`, `TODO.md`, and `DESIGN.md` to match the actual package-manager and migration plan
+- [x] **Verify**: `pnpm run lint`, `pnpm test`, `pnpm run check:circular`
+- [x] **Commit**: `chore: migrate tooling to pnpm`
 
 ## Phase 1: Primitive Foundation
 

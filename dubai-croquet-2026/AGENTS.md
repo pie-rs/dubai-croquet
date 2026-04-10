@@ -18,14 +18,14 @@ The migration goal is to preserve the legacy public URLs, content, layout, and o
 
 ### Package Manager
 
-`pnpm` migration is **Phase 0** of this plan. Until that phase is completed, expect some template docs and hooks to still reference `npm`/`npx`.
-
-After Phase 0, all commands should use `pnpm`:
+This project uses `pnpm`. All commands should use `pnpm`:
 - `pnpm install`
 - `pnpm run dev`
 - `pnpm add <pkg>` / `pnpm add -D <pkg>`
 - `pnpm dlx shadcn add <component>`
+- `pnpm exec <tool>` for locally installed CLIs like `playwright`, `drizzle-kit`, and `lint-staged`
 - `pnpm test`, `pnpm run lint`, `pnpm run build`
+- Installs run from a nested project directory, so the `prepare` script intentionally skips Husky installation unless the package is the git root
 
 ### Two Processes (inherited from template)
 
@@ -171,7 +171,7 @@ Phases must be completed in order. Within a phase, tasks can often be paralleliz
 - `pnpm run lint` - ESLint
 - `pnpm run format:check` - Prettier
 - `pnpm run check:circular` - madge circular dependency check
-- `pnpm dlx playwright test` - E2E tests
+- `pnpm exec playwright test` - E2E tests
 
 ### Testing Strategy
 

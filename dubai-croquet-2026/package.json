@@ -2,6 +2,7 @@
   "name": "monolith-industries",
   "version": "0.0.1",
   "private": true,
+  "packageManager": "pnpm@10.33.0",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -13,7 +14,7 @@
     "test:watch": "vitest",
     "check:circular": "madge --circular --extensions ts,tsx src/",
     "worker": "dotenv -e .env.local -- tsx src/worker/index.ts",
-    "prepare": "husky"
+    "prepare": "sh -c 'root=$(git rev-parse --show-toplevel 2>/dev/null || true); if [ \"$root\" != \"$PWD\" ]; then echo \"Skipping husky install from nested project\"; exit 0; fi; husky'"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
@@ -68,10 +69,10 @@
     "lint-staged": "^16.4.0",
     "madge": "^8.0.0",
     "prettier": "^3.8.1",
-    "supabase": "^2.81.2",
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
     "typescript": "^5",
+    "vite": "^8.0.8",
     "vitest": "^4.1.0"
   }
 }

@@ -55,14 +55,14 @@
 ```bash
 git clone https://github.com/josheche/monolith-industries.git
 cd monolith-industries
-npm install
+pnpm install
 cp .env.example .env.local
 
-npx supabase start          # start local Postgres, Auth, Storage, Mailpit
-npx supabase status          # copy URLs + keys into .env.local
+pnpm dlx supabase start      # start local Postgres, Auth, Storage, Mailpit
+pnpm dlx supabase status     # copy URLs + keys into .env.local
 
-npm run dev                  # http://localhost:3000
-npm run worker               # optional: background job worker
+pnpm run dev                 # http://localhost:3000
+pnpm run worker              # optional: background job worker
 ```
 
 | Service          | URL                    |
@@ -95,14 +95,14 @@ SENTRY_AUTH_TOKEN=
 ## Scripts
 
 ```bash
-npm run dev            # Next.js dev server (Turbopack)
-npm run worker         # pg-boss background worker
-npm run build          # production build
-npm run lint           # ESLint
-npm run format         # Prettier
-npm test               # Vitest
-npm run check:circular # madge circular dep check
-npx playwright test    # E2E auth flow tests
+pnpm run dev                 # Next.js dev server (Turbopack)
+pnpm run worker              # pg-boss background worker
+pnpm run build               # production build
+pnpm run lint                # ESLint
+pnpm run format              # Prettier
+pnpm test                    # Vitest
+pnpm run check:circular      # madge circular dep check
+pnpm exec playwright test    # E2E auth flow tests
 ```
 
 ## Database
@@ -110,15 +110,15 @@ npx playwright test    # E2E auth flow tests
 Schema starts empty at `src/db/schema.ts`. Add your tables:
 
 ```bash
-npx drizzle-kit generate   # create migration
-npx drizzle-kit migrate    # apply migration
+pnpm exec drizzle-kit generate # create migration
+pnpm exec drizzle-kit migrate  # apply migration
 ```
 
 ## E2E Tests
 
 ```bash
-cp .env.test.example .env.test   # fill from `npx supabase status`
-npx playwright test              # requires local Supabase + dev server
+cp .env.test.example .env.test   # fill from `pnpm dlx supabase status`
+pnpm exec playwright test        # requires local Supabase + dev server
 ```
 
 ## Tooling
@@ -147,7 +147,7 @@ git commit → Husky pre-commit
 ## Deployment
 
 **Vercel** — auto-deploys on push to `main`
-**Railway** (worker, optional) — start command: `npm run worker`
+**Railway** (worker, optional) — start command: `pnpm run worker`
 **Supabase** — create cloud project, run migrations, configure SMTP (Resend)
 
 ---

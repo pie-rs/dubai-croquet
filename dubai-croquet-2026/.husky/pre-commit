@@ -1,2 +1,2 @@
-npx lint-staged
-npm run check:circular
+pnpm exec lint-staged
+pnpm run check:circular
