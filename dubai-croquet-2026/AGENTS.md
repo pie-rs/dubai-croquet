@@ -19,6 +19,7 @@ The migration goal is to preserve the legacy public URLs, content, layout, and o
 ### Package Manager
 
 This project uses `pnpm`. All commands should use `pnpm`:
+
 - `pnpm install`
 - `pnpm run dev`
 - `pnpm add <pkg>` / `pnpm add -D <pkg>`
@@ -121,7 +122,7 @@ recentPostsSection  -> src/components/sections/recent-posts-section.tsx
 ### Styling Patterns
 
 - Colors are defined as CSS variables in `globals.css` (see DESIGN.md for values)
-- Section backgrounds use a color scheme system: `colors-a` (off-white), `colors-f` (green), `colors-h` (brown)
+- Section backgrounds use a color scheme system: `colors-a` (white), `colors-f` (green), `colors-h` (off-white)
 - Each section component should accept a `colors` prop and apply the appropriate bg/text classes
 - No dark mode - the old site had none
 - Buttons: `rounded-none` (no border radius), `px-8 py-3` padding
@@ -178,20 +179,24 @@ Phases must be completed in order. Within a phase, tasks can often be paralleliz
 Tests should be written alongside each task, not deferred to the end.
 
 **Content and contract tests**:
+
 - `getSiteConfig`, `getPage`, `getPost`, `getAllPosts`, and team queries return the expected shapes
 - route/slug mapping preserves legacy public URLs
 
 **Component tests**:
+
 - each section type gets a focused rendering test with realistic fixture data
 - `SectionRenderer` dispatches to the correct section by `_template`
 - SiteHeader/SiteFooter render the expected nav, contact, and social data
 
 **Form and API tests**:
+
 - code-owned form schemas validate the right payloads
 - API route handlers return success for valid input and `400` for invalid input
 - `contactSection` selects the correct form by `formKey`
 
 **E2E tests** (Playwright, `e2e/`):
+
 - navigate every public route and verify it renders without errors
 - submit newsletter, contact, and registration flows
 - view a blog post from the news page
@@ -199,6 +204,7 @@ Tests should be written alongside each task, not deferred to the end.
 - capture scoped visual comparison screenshots for key pages
 
 **Test file conventions**:
+
 - Co-locate unit tests: `src/components/sections/hero-section.test.tsx` next to `hero-section.tsx`
 - API route tests: `src/app/api/contact/route.test.ts` next to `route.ts`
 - E2E tests: `e2e/` directory (existing pattern)
@@ -208,6 +214,7 @@ Tests should be written alongside each task, not deferred to the end.
 ## Environment Variables
 
 Required for TinaCMS:
+
 ```
 NEXT_PUBLIC_TINA_CLIENT_ID=   # From Tina Cloud dashboard
 TINA_TOKEN=                    # From Tina Cloud dashboard

@@ -1,11 +1,12 @@
 import type { Metadata } from 'next'
-import { DM_Sans, DM_Mono, Instrument_Serif } from 'next/font/google'
+import { DM_Mono, Noto_Sans_Display, Poppins } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 
-const dmSans = DM_Sans({
+const poppins = Poppins({
   variable: '--font-sans',
+  weight: ['400', '700'],
   subsets: ['latin'],
 })
 
@@ -15,15 +16,15 @@ const dmMono = DM_Mono({
   subsets: ['latin'],
 })
 
-const instrumentSerif = Instrument_Serif({
+const notoSansDisplay = Noto_Sans_Display({
   variable: '--font-display',
-  weight: '400',
+  weight: ['400', '700'],
   subsets: ['latin'],
 })
 
 export const metadata: Metadata = {
-  title: 'The Pass',
-  description: 'Build sheets for service.',
+  title: 'Dubai Croquet Club',
+  description: 'Dubai Croquet Club. Croquet, socials, fixtures, and wildly unnecessary elegance.',
 }
 
 export default function RootLayout({
@@ -34,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${dmSans.variable} ${dmMono.variable} ${instrumentSerif.variable} antialiased`}
+        className={`${poppins.variable} ${dmMono.variable} ${notoSansDisplay.variable} antialiased`}
       >
         {children}
         <Analytics />

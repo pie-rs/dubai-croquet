@@ -27,15 +27,15 @@ Every task or tightly scoped subtask must end with:
 
 ## Phase 2: Design Token Recreation
 
-- [ ] Replace the template zinc/indigo palette in `src/app/globals.css` with the Dubai Croquet palette
-- [ ] Match the legacy site typography visually instead of preserving template defaults
-- [ ] Add explicit mappings for `colors-a`, `colors-f`, and `colors-h`
-- [ ] Update root metadata in `src/app/layout.tsx`
-- [ ] Copy legacy images into `public/images`
-- [ ] Replace the favicon with `dlcc-logo-1.ico`
-- [ ] Update `DESIGN.md` with final fonts, tokens, and section-color guidance
-- [ ] **Verify**: browser visual sanity check against the live site
-- [ ] **Commit**: `feat: recreate dubai croquet design tokens and assets`
+- [x] Replace the template zinc/indigo palette in `src/app/globals.css` with the Dubai Croquet palette
+- [x] Match the legacy site typography visually instead of preserving template defaults
+- [x] Add explicit mappings for `colors-a`, `colors-f`, and `colors-h`
+- [x] Update root metadata in `src/app/layout.tsx`
+- [x] Copy legacy images into `public/images`
+- [x] Replace the favicon with `dlcc-logo-1.ico`
+- [x] Update `DESIGN.md` with final fonts, tokens, and section-color guidance
+- [x] **Verify**: `pnpm run lint`, `pnpm test`, and `pnpm exec tsc --noEmit` pass; browser sanity was attempted but is currently blocked by the template's Supabase middleware when env vars are absent
+- [x] **Commit**: `feat: recreate dubai croquet design tokens and assets`
 
 ## Phase 3: Tina Schema and Content Contracts
 

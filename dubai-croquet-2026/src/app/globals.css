@@ -2,14 +2,11 @@
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 
-@custom-variant dark (&:is(.dark *));
-
 /*
  * Design Token System
  *
- * Neutral zinc palette with indigo accent.
- * Swap the accent color scale to match your brand.
- * Fonts: customize via next/font in layout.tsx.
+ * Dubai Croquet Club palette and typography.
+ * The public site preserves the legacy visual feel while using shadcn primitives underneath.
  */
 
 /* ─── Custom design tokens ─── */
@@ -71,73 +68,38 @@
 
 /* ─── Light theme ─── */
 :root {
-  --background: #fafafa;
-  --foreground: #18181b;
+  --background: #f6f1ed;
+  --foreground: #5a4a42;
   --card: #ffffff;
-  --card-foreground: #18181b;
+  --card-foreground: #5a4a42;
   --popover: #ffffff;
-  --popover-foreground: #18181b;
-  --primary: #4f46e5;
-  --primary-foreground: #ffffff;
-  --secondary: #f4f4f5;
-  --secondary-foreground: #27272a;
-  --muted: #e4e4e7;
-  --muted-foreground: #71717a;
-  --accent: #eef2ff;
-  --accent-foreground: #3730a3;
+  --popover-foreground: #5a4a42;
+  --primary: #8cc63f;
+  --primary-foreground: #5a4a42;
+  --secondary: #5a4a42;
+  --secondary-foreground: #ffffff;
+  --muted: #ebe5df;
+  --muted-foreground: #7a6a62;
+  --accent: #eef4e4;
+  --accent-foreground: #5a4a42;
   --destructive: #dc2626;
-  --border: #d4d4d8;
-  --input: #d4d4d8;
-  --ring: #4f46e5;
-  --chart-1: #4f46e5;
-  --chart-2: #6366f1;
-  --chart-3: #818cf8;
-  --chart-4: #a5b4fc;
-  --chart-5: #c7d2fe;
-  --radius: 0.625rem;
-  --sidebar: #f4f4f5;
-  --sidebar-foreground: #18181b;
-  --sidebar-primary: #4f46e5;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #e4e4e7;
-  --sidebar-accent-foreground: #27272a;
-  --sidebar-border: #d4d4d8;
-  --sidebar-ring: #4f46e5;
-}
-
-/* ─── Dark theme ─── */
-.dark {
-  --background: #18181b;
-  --foreground: #fafafa;
-  --card: #27272a;
-  --card-foreground: #fafafa;
-  --popover: #27272a;
-  --popover-foreground: #fafafa;
-  --primary: #6366f1;
-  --primary-foreground: #ffffff;
-  --secondary: #3f3f46;
-  --secondary-foreground: #fafafa;
-  --muted: #3f3f46;
-  --muted-foreground: #a1a1aa;
-  --accent: #3f3f46;
-  --accent-foreground: #fafafa;
-  --destructive: #ef4444;
-  --border: #3f3f46;
-  --input: #3f3f46;
-  --ring: #6366f1;
-  --chart-1: #818cf8;
-  --chart-2: #6366f1;
-  --chart-3: #a5b4fc;
-  --chart-4: #4f46e5;
-  --chart-5: #c7d2fe;
-  --sidebar: #27272a;
-  --sidebar-foreground: #fafafa;
-  --sidebar-primary: #6366f1;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #3f3f46;
-  --sidebar-accent-foreground: #fafafa;
-  --sidebar-border: #3f3f46;
-  --sidebar-ring: #6366f1;
+  --border: #cfc6c0;
+  --input: #cfc6c0;
+  --ring: #8cc63f;
+  --chart-1: #8cc63f;
+  --chart-2: #5a4a42;
+  --chart-3: #a5cc73;
+  --chart-4: #8b776c;
+  --chart-5: #ddd3cd;
+  --radius: 0rem;
+  --sidebar: #f6f1ed;
+  --sidebar-foreground: #5a4a42;
+  --sidebar-primary: #8cc63f;
+  --sidebar-primary-foreground: #5a4a42;
+  --sidebar-accent: #ebe5df;
+  --sidebar-accent-foreground: #5a4a42;
+  --sidebar-border: #cfc6c0;
+  --sidebar-ring: #8cc63f;
 }
 
 @layer base {
@@ -158,8 +120,126 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-size: 1rem;
   }
   html {
     @apply font-sans;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply break-words;
+    line-height: 1.15;
+  }
+}
+
+@layer components {
+  .content-width {
+    @apply mx-auto w-full max-w-content;
+  }
+
+  .content-width-narrow {
+    @apply mx-auto w-full max-w-narrow;
+  }
+
+  .colors-a {
+    @apply bg-card text-card-foreground;
+  }
+
+  .colors-f {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  .colors-h {
+    @apply bg-background text-foreground;
+  }
+
+  .rich-text {
+    @apply leading-relaxed;
+  }
+
+  .rich-text a {
+    @apply underline underline-offset-2;
+  }
+
+  .rich-text a:hover {
+    @apply no-underline;
+  }
+
+  .rich-text p,
+  .rich-text ul,
+  .rich-text ol,
+  .rich-text blockquote,
+  .rich-text figure,
+  .rich-text table {
+    margin: 1.5rem 0;
+  }
+
+  .rich-text h1,
+  .rich-text h2,
+  .rich-text h3,
+  .rich-text h4,
+  .rich-text h5,
+  .rich-text h6 {
+    margin: 2.5rem 0 1.5rem;
+  }
+
+  .rich-text h1:first-child,
+  .rich-text h2:first-child,
+  .rich-text h3:first-child,
+  .rich-text h4:first-child,
+  .rich-text h5:first-child,
+  .rich-text h6:first-child,
+  .rich-text p:first-child,
+  .rich-text ul:first-child,
+  .rich-text ol:first-child,
+  .rich-text blockquote:first-child,
+  .rich-text figure:first-child,
+  .rich-text table:first-child {
+    margin-top: 0;
+  }
+
+  .rich-text ul {
+    @apply list-disc pl-5;
+  }
+
+  .rich-text ol {
+    @apply list-decimal pl-5;
+  }
+
+  .rich-text li > ul,
+  .rich-text li > ol {
+    margin: 0;
+  }
+
+  .rich-text blockquote {
+    @apply border-l-4 border-current pl-5;
+    font-size: 1.25em;
+    line-height: 1.4;
+  }
+
+  .rich-text hr {
+    @apply my-10 h-px border-0 bg-current;
+  }
+
+  .legacy-button {
+    @apply inline-flex items-center justify-center border-2 border-transparent px-8 py-3 text-center text-sm font-normal transition-opacity duration-200 ease-in hover:opacity-80;
+  }
+
+  .legacy-link {
+    @apply relative inline-flex items-center justify-center text-sm font-normal uppercase no-underline;
+  }
+
+  .legacy-link::after {
+    @apply absolute left-0 h-0.5 w-0 bg-current transition-all duration-200 ease-in;
+    bottom: -2px;
+    content: '';
+  }
+
+  .legacy-link:hover::after {
+    @apply w-full;
   }
 }
