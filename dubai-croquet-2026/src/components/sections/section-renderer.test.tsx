@@ -7,9 +7,13 @@ import type { AnchorHTMLAttributes, ImgHTMLAttributes } from 'react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { FeatureHighlightSection } from '@/components/sections/feature-highlight-section'
 import { ContactSection } from '@/components/sections/contact-section'
+import { FeaturedItemsSection } from '@/components/sections/featured-items-section'
+import { FeaturedPeopleSection } from '@/components/sections/featured-people-section'
 import { FaqSection } from '@/components/sections/faq-section'
 import { MediaGallerySection } from '@/components/sections/media-gallery-section'
+import { RecentPostsSection } from '@/components/sections/recent-posts-section'
 import { SectionRenderer } from '@/components/sections/section-renderer'
+import { TestimonialsSection } from '@/components/sections/testimonials-section'
 import { TextSection } from '@/components/sections/text-section'
 
 vi.mock('next/link', () => ({
@@ -18,6 +22,43 @@ vi.mock('next/link', () => ({
       {children}
     </a>
   ),
+}))
+
+vi.mock('@/lib/tina', () => ({
+  getAllPosts: vi.fn(async () => [
+    {
+      title: 'First Post',
+      slug: 'first-post',
+      date: '2021-04-10',
+      excerpt: 'Dubai Croquet kicks off its inaugural session',
+      author: 'team/desmond-eagle.json',
+    },
+    {
+      title: 'Second Post',
+      slug: 'second-post',
+      date: '2021-06-01',
+      excerpt: 'What to wear this croquet season',
+      author: 'team/person-b7rybasni.json',
+    },
+  ]),
+  getTeam: vi.fn(async () => [
+    {
+      slug: 'desmond-eagle',
+      firstName: 'Piers',
+      lastName: 'S',
+      role: 'Captain',
+      bio: 'Generally general.',
+      image: { src: '/images/the-captain.jpg', alt: 'The captain' },
+    },
+    {
+      slug: 'person-b7rybasni',
+      firstName: 'Maz',
+      lastName: 'G',
+      role: 'Mallet Monster',
+      bio: 'Small but mighty.',
+      image: { src: '/images/maz.jpg', alt: 'Maz' },
+    },
+  ]),
 }))
 
 vi.mock('next/image', () => ({
@@ -133,10 +174,109 @@ describe('narrative sections', () => {
     expect(screen.getByAltText('Contact form image')).toBeInTheDocument()
   })
 
-  it('dispatches supported sections and ignores unknown templates', () => {
+  it('renders featured items with images and calls to action', () => {
     render(
-      <SectionRenderer
-        sections={[
+      <FeaturedItemsSection
+        _template="featuredItemsSection"
+        title="Why Play Croquet?"
+        columns={3}
+        items={[
+          {
+            title: 'Better Looking',
+            subtitle: 'Immediately',
+            text: 'You will become more attractive.',
+            featuredImage: { src: '/images/faster.svg', alt: 'Faster' },
+            actions: [{ label: 'Tell me more', url: '/the-game', style: 'link' }],
+          },
+        ]}
+      />,
+    )
+
+    expect(screen.getByRole('heading', { name: 'Why Play Croquet?' })).toBeInTheDocument()
+    expect(screen.getByAltText('Faster')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Tell me more' })).toHaveAttribute('href', '/the-game')
+  })
+
+  it('renders testimonials and featured people sections', () => {
+    render(
+      <>
+        <TestimonialsSection
+          _template="testimonialsSection"
+          testimonials={[
+            {
+              quote: '"We dress up to discuss our game plan"',
+              name: 'Cate Blanchett & Leonardo Di Caprio',
+              title: 'Strategy unit',
+              image: { src: '/images/leo.jpg', alt: 'Strategy duo' },
+            },
+          ]}
+        />
+        <FeaturedPeopleSection
+          _template="featuredPeopleSection"
+          title="About us"
+          resolvedPeople={[
+            {
+              slug: 'desmond-eagle',
+              firstName: 'Piers',
+              lastName: 'S',
+              role: 'Captain',
+              bio: 'Generally general.',
+              image: { src: '/images/the-captain.jpg', alt: 'The captain' },
+            },
+          ]}
+        />
+      </>,
+    )
+
+    expect(screen.getByText(/we dress up to discuss our game plan/i)).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'About us' })).toBeInTheDocument()
+    expect(screen.getByText('Captain')).toBeInTheDocument()
+  })
+
+  it('renders recent posts with post metadata', () => {
+    render(
+      <RecentPostsSection
+        _template="recentPostsSection"
+        title="Read next"
+        posts={[
+          {
+            title: 'First Post',
+            slug: 'first-post',
+            date: '2021-04-10',
+            excerpt: 'Dubai Croquet kicks off its inaugural session',
+            author: 'team/desmond-eagle.json',
+          },
+        ]}
+        authorsBySlug={
+          new Map([
+            [
+              'team/desmond-eagle.json',
+              {
+                slug: 'desmond-eagle',
+                firstName: 'Piers',
+                lastName: 'S',
+              },
+            ],
+          ])
+        }
+        showDate
+        showAuthor
+        showExcerpt
+      />,
+    )
+
+    expect(screen.getByRole('heading', { name: 'Read next' })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'First Post' })).toHaveAttribute('href', '/blog/first-post')
+    expect(screen.getByText('10 April 2021')).toBeInTheDocument()
+    expect(screen.getByText('Piers S')).toBeInTheDocument()
+    expect(screen.getByText('Dubai Croquet kicks off its inaugural session')).toBeInTheDocument()
+  })
+
+  it('dispatches supported sections and ignores unknown templates', async () => {
+    render(
+      await SectionRenderer({
+        currentPostSlug: 'second-post',
+        sections: [
           {
             _template: 'quoteSection',
             quote: '"One may know how to conquer without being able to do it"',
@@ -166,11 +306,33 @@ describe('narrative sections', () => {
             formKey: 'newsletter',
           },
           {
+            _template: 'featuredItemsSection',
+            title: 'Why play?',
+            items: [{ title: 'Better Looking', text: 'Obviously.' }],
+          },
+          {
+            _template: 'testimonialsSection',
+            testimonials: [{ quote: '"Still undefeated"', name: 'The Captain' }],
+          },
+          {
+            _template: 'featuredPeopleSection',
+            title: 'About us',
+            people: [{ person: 'team/desmond-eagle.json' }],
+          },
+          {
+            _template: 'recentPostsSection',
+            title: 'Read next',
+            recentCount: 2,
+            showDate: true,
+            showAuthor: true,
+            showExcerpt: true,
+          },
+          {
             _template: 'notBuiltYet',
             title: 'Ignored',
           },
-        ]}
-      />,
+        ],
+      }),
     )
 
     expect(screen.getByText(/one may know how to conquer/i)).toBeInTheDocument()
@@ -178,6 +340,11 @@ describe('narrative sections', () => {
     expect(screen.getByText('Question?')).toBeInTheDocument()
     expect(screen.getByAltText('First image')).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Sign Up' })).toBeInTheDocument()
+    expect(screen.getByText('Better Looking')).toBeInTheDocument()
+    expect(screen.getByText(/still undefeated/i)).toBeInTheDocument()
+    expect(screen.getByText('Generally general.')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'First Post' })).toHaveAttribute('href', '/blog/first-post')
+    expect(screen.queryByText('Second Post')).not.toBeInTheDocument()
     expect(screen.queryByText('Ignored')).not.toBeInTheDocument()
   })
 })
