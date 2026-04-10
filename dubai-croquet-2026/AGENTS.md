@@ -26,6 +26,7 @@ This project uses `pnpm`. All commands should use `pnpm`:
 - `pnpm dlx shadcn add <component>`
 - `pnpm exec <tool>` for locally installed CLIs like `playwright`, `drizzle-kit`, and `lint-staged`
 - `pnpm test`, `pnpm run lint`, `pnpm run build`
+- `pnpm run lint` is intentionally scoped to source, Tina, and top-level config files so generated admin output does not blow up ESLint memory usage
 - Installs run from a nested project directory, so the `prepare` script intentionally skips Husky installation unless the package is the git root
 
 ### Two Processes (inherited from template)
@@ -106,7 +107,8 @@ recentPostsSection  -> src/components/sections/recent-posts-section.tsx
 ### TinaCMS Patterns
 
 - Schema definition: `tina/config.ts`
-- Client helpers: `src/lib/tina.ts`
+- Content helpers: `src/lib/tina.ts`
+- Treat `tina/config.ts` as source, but keep generated Tina output (`tina/__generated__/` and `public/admin/`) out of git
 - Content files:
   - `content/site/config.json`
   - `content/pages/*.json`
@@ -115,7 +117,8 @@ recentPostsSection  -> src/components/sections/recent-posts-section.tsx
 - Run TinaCMS + dev server together: `pnpm run tina:dev`
 - Build: `pnpm run tina:build && pnpm run build`
 - The `_template` field on sections discriminates which component to render
-- Use TinaCMS's generated client for all content queries
+- During migration, read content through the shared filesystem-backed helpers in `src/lib/tina.ts`
+- Defer Tina generated-client adoption until the public routes are in place and Tina Cloud setup is complete
 - For rich-text fields, use `@tinacms/mdx` or `TinaMarkdown` renderer
 - Keep form field definitions in code via `formKey`; do not rebuild Stackbit's generic form-builder schema in Tina
 
@@ -181,7 +184,7 @@ Tests should be written alongside each task, not deferred to the end.
 **Content and contract tests**:
 
 - `getSiteConfig`, `getPage`, `getPost`, `getAllPosts`, and team queries return the expected shapes
-- route/slug mapping preserves legacy public URLs
+- route/slug mapping preserves legacy public URLs, including `/termsandconditions`
 
 **Component tests**:
 
@@ -219,5 +222,7 @@ Required for TinaCMS:
 NEXT_PUBLIC_TINA_CLIENT_ID=   # From Tina Cloud dashboard
 TINA_TOKEN=                    # From Tina Cloud dashboard
 ```
+
+These can stay empty during local schema and contract work. They become required once Tina Cloud editing is wired interactively.
 
 Existing (Supabase, Sentry) - see `.env.example`

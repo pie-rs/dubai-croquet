@@ -1,0 +1,39 @@
+{
+  "title": "Dubai Croquet Club",
+  "favicon": "/images/dlcc-logo-1.ico",
+  "header": {
+    "logo": {
+      "src": "/images/dlcc-logo.webp",
+      "alt": "Dubai Croquet Club"
+    },
+    "isTitleVisible": true,
+    "primaryLinks": []
+  },
+  "footer": {
+    "logo": {
+      "src": "/images/DCC-LOGO-COLOUR.svg",
+      "alt": "Dubai Croquet Club"
+    },
+    "contacts": {
+      "phoneNumber": "+971 50 760 8210",
+      "email": "hello@dubaicroquet.com"
+    },
+    "primaryLinks": [],
+    "legalLinks": [],
+    "socialLinks": [],
+    "copyrightText": {
+      "type": "root",
+      "children": [
+        {
+          "type": "p",
+          "children": [
+            {
+              "type": "text",
+              "text": "Copyright Dubai Croquet Club"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -2,7 +2,7 @@ import { mkdtemp, mkdir, rm, writeFile } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
 import { describe, expect, it } from 'vitest'
-import { createTinaContentLoader } from '@/lib/tina-content'
+import { createTinaContentLoader } from '@/lib/tina'
 
 describe('createTinaContentLoader', () => {
   it('loads site config, pages, posts, and team content from a local filesystem tree', async () => {
@@ -41,7 +41,13 @@ describe('createTinaContentLoader', () => {
           'slug: /first-post/',
           'date: 2024-02-01',
           'excerpt: First excerpt',
-          'featuredImage: /images/first.jpg',
+          'featuredImage:',
+          '  src: /images/first.jpg',
+          '  alt: First post image',
+          'bottomSections:',
+          '  - _template: recentPostsSection',
+          '    title: Read more',
+          '    recentCount: 3',
           '---',
           '',
           '# First Post',
@@ -116,9 +122,19 @@ describe('createTinaContentLoader', () => {
         await expect(loader.getPost('first-post')).resolves.toEqual({
           title: 'First Post',
           slug: 'first-post',
-          date: '2024-02-01',
+          date: '2024-02-01T00:00:00.000Z',
           excerpt: 'First excerpt',
-          featuredImage: '/images/first.jpg',
+          featuredImage: {
+            src: '/images/first.jpg',
+            alt: 'First post image',
+          },
+          bottomSections: [
+            {
+              _template: 'recentPostsSection',
+              title: 'Read more',
+              recentCount: 3,
+            },
+          ],
           body: '# First Post\n\nBody copy.\n',
         })
 
@@ -126,16 +142,26 @@ describe('createTinaContentLoader', () => {
           {
             title: 'Second Post',
             slug: 'second-post',
-            date: '2024-03-01',
+            date: '2024-03-01T00:00:00.000Z',
             excerpt: 'Second excerpt',
             body: 'Second body.\n',
           },
           {
             title: 'First Post',
             slug: 'first-post',
-            date: '2024-02-01',
+            date: '2024-02-01T00:00:00.000Z',
             excerpt: 'First excerpt',
-            featuredImage: '/images/first.jpg',
+            featuredImage: {
+              src: '/images/first.jpg',
+              alt: 'First post image',
+            },
+            bottomSections: [
+              {
+                _template: 'recentPostsSection',
+                title: 'Read more',
+                recentCount: 3,
+              },
+            ],
             body: '# First Post\n\nBody copy.\n',
           },
         ])
@@ -172,6 +198,39 @@ describe('createTinaContentLoader', () => {
     } finally {
       await rm(root, { recursive: true, force: true })
     }
+  })
+
+  it('normalizes exact legacy routes to preserved public slugs', async () => {
+    await withContentFixture(
+      {
+        'content/pages/index.json': JSON.stringify({ title: 'Home', slug: 'index', sections: [] }),
+        'content/pages/the-game.json': JSON.stringify({
+          title: 'The Game',
+          slug: '/the-game/',
+          sections: [],
+        }),
+        'content/pages/faq.json': JSON.stringify({
+          title: 'FAQ',
+          slug: '/faq/',
+          sections: [],
+        }),
+        'content/pages/termsandconditions.json': JSON.stringify({
+          title: 'Terms',
+          slug: '/termsandconditions/',
+          sections: [],
+        }),
+      },
+      async (root) => {
+        const loader = createTinaContentLoader({ baseDir: root })
+
+        await expect(loader.getPage('/')).resolves.toMatchObject({ slug: '' })
+        await expect(loader.getPage('/the-game')).resolves.toMatchObject({ slug: 'the-game' })
+        await expect(loader.getPage('/faq/')).resolves.toMatchObject({ slug: 'faq' })
+        await expect(loader.getPage('/termsandconditions/')).resolves.toMatchObject({
+          slug: 'termsandconditions',
+        })
+      },
+    )
   })
 })
 

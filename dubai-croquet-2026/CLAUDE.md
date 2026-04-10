@@ -110,6 +110,7 @@ Schema is at `src/db/schema.ts` — starts empty. Add your tables, run `drizzle-
   - local verification for the touched area
   - one atomic git commit before moving on
 - Install required shadcn primitives before building composed site components that depend on them
+- During the Tina migration, use the shared filesystem-backed content helpers in `src/lib/tina.ts` for local reads; do not block on Tina generated-client wiring before routes exist
 - Keep form schemas code-owned; use content-configured `formKey` values instead of CMS-defined field arrays
 - This package lives below the git root, so `prepare` intentionally skips Husky installation outside the repo root
 

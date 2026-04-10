@@ -1,5 +1,6 @@
 import { readFile, readdir } from 'node:fs/promises'
 import path from 'node:path'
+import matter from 'gray-matter'
 
 type JsonRecord = Record<string, unknown>
 
@@ -190,125 +191,11 @@ function parseDocument(filePath: string, text: string): JsonRecord {
 }
 
 function parseMarkdownDocument(text: string): JsonRecord {
-  const frontmatterMatch = text.match(/^---\s*\r?\n([\s\S]*?)\r?\n---\s*\r?\n?([\s\S]*)$/)
-  if (!frontmatterMatch) {
-    return { body: text.trimStart() }
-  }
-
-  const frontmatter = parseFrontmatterBlock(frontmatterMatch[1])
-  const body = frontmatterMatch[2].trimStart()
+  const { data, content } = matter(text)
+  const frontmatter = isRecord(data) ? (normalizeMatterValue(data) as JsonRecord) : {}
+  const body = content.trimStart()
 
   return body.length > 0 ? { ...frontmatter, body } : frontmatter
-}
-
-function parseFrontmatterBlock(block: string): JsonRecord {
-  const lines = block.split(/\r?\n/)
-  const result: JsonRecord = {}
-
-  for (let index = 0; index < lines.length; index += 1) {
-    const line = lines[index]
-    if (!line.trim() || line.trim().startsWith('#')) {
-      continue
-    }
-
-    const scalarMatch = line.match(/^([A-Za-z0-9_-]+):(?:\s*(.*))?$/)
-    if (!scalarMatch) {
-      continue
-    }
-
-    const key = scalarMatch[1]
-    const rawValue = scalarMatch[2] ?? ''
-
-    if (rawValue === '') {
-      const arrayValues: unknown[] = []
-      let cursor = index + 1
-
-      while (cursor < lines.length && /^\s*-\s+/.test(lines[cursor])) {
-        arrayValues.push(parseScalarValue(lines[cursor].replace(/^\s*-\s+/, '')))
-        cursor += 1
-      }
-
-      if (arrayValues.length > 0) {
-        result[key] = arrayValues
-        index = cursor - 1
-        continue
-      }
-
-      result[key] = ''
-      continue
-    }
-
-    result[key] = parseScalarValue(rawValue)
-  }
-
-  return result
-}
-
-function parseScalarValue(value: string): unknown {
-  const trimmed = value.trim()
-
-  if (trimmed.length === 0) {
-    return ''
-  }
-
-  if ((trimmed.startsWith('"') && trimmed.endsWith('"')) || (trimmed.startsWith("'") && trimmed.endsWith("'"))) {
-    return trimmed.slice(1, -1)
-  }
-
-  if (trimmed === 'null') {
-    return null
-  }
-
-  if (trimmed === 'true') {
-    return true
-  }
-
-  if (trimmed === 'false') {
-    return false
-  }
-
-  if (/^-?\d+(?:\.\d+)?$/.test(trimmed)) {
-    return Number(trimmed)
-  }
-
-  if (trimmed.startsWith('[') && trimmed.endsWith(']')) {
-    const inner = trimmed.slice(1, -1).trim()
-    if (!inner) {
-      return []
-    }
-
-    return splitCommaSeparatedValues(inner).map((item) => parseScalarValue(item))
-  }
-
-  return trimmed
-}
-
-function splitCommaSeparatedValues(value: string): string[] {
-  const values: string[] = []
-  let current = ''
-  let quote: '"' | "'" | null = null
-
-  for (const character of value) {
-    if ((character === '"' || character === "'") && (!quote || quote === character)) {
-      quote = quote === character ? null : character
-      current += character
-      continue
-    }
-
-    if (character === ',' && !quote) {
-      values.push(current.trim())
-      current = ''
-      continue
-    }
-
-    current += character
-  }
-
-  if (current.trim().length > 0) {
-    values.push(current.trim())
-  }
-
-  return values
 }
 
 function normalizeRouteSlug(slug: string): string {
@@ -377,6 +264,24 @@ function parseDateValue(value: unknown): number {
 
 function isRecord(value: unknown): value is JsonRecord {
   return typeof value === 'object' && value !== null && !Array.isArray(value)
+}
+
+function normalizeMatterValue(value: unknown): unknown {
+  if (value instanceof Date) {
+    return value.toISOString()
+  }
+
+  if (Array.isArray(value)) {
+    return value.map((item) => normalizeMatterValue(item))
+  }
+
+  if (isRecord(value)) {
+    return Object.fromEntries(
+      Object.entries(value).map(([key, item]) => [key, normalizeMatterValue(item)]),
+    )
+  }
+
+  return value
 }
 
 function isMissingFileError(error: unknown): boolean {

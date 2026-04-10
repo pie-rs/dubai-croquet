@@ -1,0 +1,23 @@
+{
+  "firstName": "The",
+  "lastName": "Captain",
+  "role": "Chairperson, Captain & Generally General Glorious Leader",
+  "bio": {
+    "type": "root",
+    "children": [
+      {
+        "type": "p",
+        "children": [
+          {
+            "type": "text",
+            "text": "Placeholder team profile until the legacy roster is migrated."
+          }
+        ]
+      }
+    ]
+  },
+  "image": {
+    "src": "/images/the-captain.jpg",
+    "alt": "The Captain"
+  }
+}

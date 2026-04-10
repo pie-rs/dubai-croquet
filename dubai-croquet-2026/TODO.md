@@ -39,21 +39,22 @@ Every task or tightly scoped subtask must end with:
 
 ## Phase 3: Tina Schema and Content Contracts
 
-- [ ] Install `tinacms` and `@tinacms/cli`
-- [ ] Create `tina/config.ts`
-- [ ] Add content roots:
+- [x] Install `tinacms` and `@tinacms/cli`
+- [x] Create `tina/config.ts`
+- [x] Add content roots:
   - `content/site/config.json`
   - `content/pages/*.json`
   - `content/posts/*.mdx`
   - `content/team/*.json`
-- [ ] Create collections: `siteConfig`, `pages`, `posts`, `team`
-- [ ] Keep form field definitions out of Tina; use `formKey` for code-owned forms
-- [ ] Create `src/lib/tina.ts`
-- [ ] Add Tina scripts and env vars
-- [ ] Update docs with the final content model and non-goals
-- [ ] **Test**: contract tests for `getSiteConfig`, `getPage`, `getPost`, `getAllPosts`, `getTeam`
-- [ ] **Test**: route/slug mapping tests for `/`, `/the-game`, `/faq`, `/termsandconditions`
-- [ ] **Verify**: `pnpm run tina:dev` starts and content is queryable
+- [x] Create collections: `siteConfig`, `pages`, `posts`, `team`
+- [x] Keep form field definitions out of Tina; use `formKey` for code-owned forms
+- [x] Create `src/lib/tina.ts`
+- [x] Add Tina scripts and env vars
+- [x] Use a shared filesystem-backed content contract layer for migration reads; defer generated-client adoption until Tina Cloud setup is complete
+- [x] Update docs with the final content model and non-goals
+- [x] **Test**: contract tests for `getSiteConfig`, `getPage`, `getPost`, `getAllPosts`, `getTeam`
+- [x] **Test**: route/slug mapping tests for `/`, `/the-game`, `/faq`, `/termsandconditions`
+- [x] **Verify**: `pnpm exec tinacms build --skip-cloud-checks`, `pnpm test`, `pnpm run lint`, and `pnpm exec tsc --noEmit`
 - [ ] **Commit**: `feat: add tina schema and content loading contracts`
 
 ## Phase 4: Content and Media Migration

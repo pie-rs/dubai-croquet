@@ -16,6 +16,8 @@
 # next.js
 /.next/
 /out/
+/public/admin/
+/tina/__generated__/
 
 # production
 /build
