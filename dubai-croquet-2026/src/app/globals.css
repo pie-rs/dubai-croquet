@@ -102,6 +102,14 @@
   --sidebar-ring: #8cc63f;
 }
 
+@utility max-w-content {
+  max-width: var(--width-content);
+}
+
+@utility max-w-narrow {
+  max-width: var(--width-narrow);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -138,11 +146,13 @@
 
 @layer components {
   .content-width {
-    @apply mx-auto w-full max-w-content;
+    @apply mx-auto w-full;
+    max-width: var(--width-content);
   }
 
   .content-width-narrow {
-    @apply mx-auto w-full max-w-narrow;
+    @apply mx-auto w-full;
+    max-width: var(--width-narrow);
   }
 
   .colors-a {
