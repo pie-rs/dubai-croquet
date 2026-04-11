@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import { SectionShell } from '@/components/sections/section-shell'
-import { Card, CardContent } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import type { TestimonialsSectionData } from '@/components/sections/types'
 
@@ -26,36 +25,45 @@ export function TestimonialsSection({
 
         <div
           className={cn(
-            'grid gap-6',
-            variant === 'variant-a' ? 'lg:grid-cols-3' : 'md:grid-cols-2 xl:grid-cols-3',
+            'space-y-12',
+            variant === 'variant-a' ? '' : 'grid gap-6 md:grid-cols-2 xl:grid-cols-3',
           )}
         >
           {visibleTestimonials.map((testimonial, index) => (
-            <Card
+            <blockquote
               key={`${testimonial.name ?? 'testimonial'}-${index}`}
-              className="rounded-none border border-border/60 bg-background/30 py-0"
+              className={cn(
+                variant === 'variant-a'
+                  ? 'flex flex-col gap-8 md:flex-row md:items-center'
+                  : 'space-y-6 border border-border/60 bg-background/30 px-6 py-6',
+              )}
             >
-              <CardContent className="flex h-full flex-col gap-6 px-6 py-6">
-                {testimonial.image?.src ? (
+              {testimonial.image?.src ? (
+                <div className={cn(variant === 'variant-a' ? 'max-w-lg md:w-2/5 md:flex-shrink-0' : '')}>
                   <Image
                     src={testimonial.image.src}
                     alt={testimonial.image.alt ?? testimonial.name ?? 'Dubai Croquet Club'}
                     width={480}
                     height={480}
-                    className="aspect-square w-full border border-border/60 object-cover"
+                    className={cn(
+                      'w-full object-cover',
+                      variant === 'variant-a' ? 'rounded-[1.75rem]' : 'aspect-square border border-border/60',
+                    )}
                   />
-                ) : null}
+                </div>
+              ) : null}
+              <div className="flex-grow space-y-8">
                 {testimonial.quote ? (
-                  <blockquote className="font-display text-2xl leading-tight md:text-3xl">{testimonial.quote}</blockquote>
+                  <p className="font-display text-3xl leading-tight sm:text-4xl lg:text-5xl">{testimonial.quote}</p>
                 ) : null}
                 {(testimonial.name || testimonial.title) && (
-                  <div className="space-y-1 text-sm uppercase tracking-[0.14em] text-muted-foreground">
-                    {testimonial.name ? <p className="text-foreground">{testimonial.name}</p> : null}
+                  <footer className="space-y-1 text-base text-muted-foreground">
+                    {testimonial.name ? <p className="text-xl text-foreground sm:text-2xl">{testimonial.name}</p> : null}
                     {testimonial.title ? <p>{testimonial.title}</p> : null}
-                  </div>
+                  </footer>
                 )}
-              </CardContent>
-            </Card>
+              </div>
+            </blockquote>
           ))}
         </div>
       </div>

@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { Markdown } from '@/components/markdown'
 import { SectionActions } from '@/components/sections/section-actions'
 import { SectionShell } from '@/components/sections/section-shell'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { cn } from '@/lib/utils'
 import type { FeaturedPeopleSectionData, SectionTeamMember } from '@/components/sections/types'
 
 type FeaturedPeopleSectionProps = FeaturedPeopleSectionData & {
@@ -14,6 +14,7 @@ export function FeaturedPeopleSection({
   width,
   title,
   subtitle,
+  variant,
   actions,
   resolvedPeople = [],
 }: FeaturedPeopleSectionProps) {
@@ -21,22 +22,30 @@ export function FeaturedPeopleSection({
     <SectionShell colors={colors} width={width}>
       <div className="space-y-10">
         {(title || subtitle || (actions?.length ?? 0) > 0) && (
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="space-y-4">
             <div className="max-w-3xl space-y-4">
               {title ? <h2 className="font-display text-4xl md:text-5xl">{title}</h2> : null}
               {subtitle ? <p className="text-lg leading-8 text-muted-foreground md:text-xl">{subtitle}</p> : null}
             </div>
-            <SectionActions actions={actions} className="sm:justify-end" />
+            <SectionActions actions={actions} />
           </div>
         )}
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div
+          className={cn(
+            'grid gap-x-8 gap-y-10',
+            variant === 'variant-b' ? 'lg:grid-cols-2' : 'md:grid-cols-2 xl:grid-cols-3',
+          )}
+        >
           {resolvedPeople.map((person) => {
             const fullName = [person.firstName, person.lastName].filter(Boolean).join(' ').trim()
             return (
-              <Card key={person.slug ?? fullName} className="rounded-none border border-border/60 bg-background/30 py-0">
+              <article
+                key={person.slug ?? fullName}
+                className={cn(variant === 'variant-b' ? 'sm:flex sm:items-start' : 'space-y-5')}
+              >
                 {person.image?.src ? (
-                  <div className="border-b border-border/60">
+                  <div className={cn(variant === 'variant-b' ? 'w-full sm:w-1/3 sm:flex-shrink-0' : '')}>
                     <Image
                       src={person.image.src}
                       alt={person.image.alt ?? fullName ?? 'Dubai Croquet Club member'}
@@ -46,16 +55,12 @@ export function FeaturedPeopleSection({
                     />
                   </div>
                 ) : null}
-                <CardHeader className="space-y-2 px-6 pt-6">
-                  {fullName ? <CardTitle className="font-display text-3xl">{fullName}</CardTitle> : null}
-                  {person.role ? <p className="text-sm uppercase tracking-[0.14em] text-muted-foreground">{person.role}</p> : null}
-                </CardHeader>
-                {person.bio ? (
-                  <CardContent className="px-6 pb-6">
-                    <Markdown content={person.bio} />
-                  </CardContent>
-                ) : null}
-              </Card>
+                <div className={cn('space-y-3', variant === 'variant-b' && person.image?.src ? 'pt-6 sm:pl-6 sm:pt-0' : '')}>
+                  {fullName ? <h3 className="font-display text-3xl">{fullName}</h3> : null}
+                  {person.role ? <p className="text-base text-muted-foreground">{person.role}</p> : null}
+                  {person.bio ? <Markdown content={person.bio} /> : null}
+                </div>
+              </article>
             )
           })}
         </div>
