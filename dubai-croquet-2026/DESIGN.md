@@ -7,6 +7,7 @@
 - **Logo**: `/images/dlcc-logo.webp` (header), `/images/DCC-LOGO-COLOUR.svg` (footer)
 - **Favicon**: `/images/dlcc-logo-1.ico`
 - **Implementation rule**: preserve the legacy site's public feel and composition while using shadcn primitives as the underlying implementation layer
+- **Operational note**: local design review should use `.env.development` as the primary env file, with `.env.local` reserved for machine-specific overrides so preview and Tina behavior stay predictable across the team
 
 ## Color Palette
 

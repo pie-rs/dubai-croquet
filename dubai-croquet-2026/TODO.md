@@ -150,5 +150,6 @@ Every task or tightly scoped subtask must end with:
   - mobile header/menu state
 - [ ] Compare the new site against the live site for layout, spacing, typography, imagery, and responsive behavior
 - [ ] Update docs with the verification workflow and any intentional differences
+- [x] Document the active env-file policy in `README.md` and `AGENTS.md` so local dev, tests, and Vercel deployments use the correct files
 - [ ] **Verify**: `pnpm run tina:build`, `pnpm run build`, `pnpm test`, `pnpm run lint`, `pnpm run check:circular`
 - [ ] **Commit**: `test: add migration smoke and visual regression coverage`

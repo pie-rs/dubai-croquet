@@ -221,6 +221,17 @@ Tests should be written alongside each task, not deferred to the end.
 
 ## Environment Variables
 
+Environment file policy for this repo:
+
+- `.env.example` is the committed template only
+- `.env.development` is the primary local development file
+- `.env.local` is for developer-specific overrides on top of `.env.development`
+- `.env` should stay a low-priority fallback, not the main place for active local secrets
+- `.env.test` is only for Playwright or other test-specific runs and should be created from `.env.test.example`
+- Vercel environment variables are the source of truth for preview and production
+
+Local development currently loads `.env.local`, `.env.development`, and `.env`. Keep Tina Cloud values in `.env.development` unless you specifically need to override them on one machine.
+
 Required for TinaCMS:
 
 ```
