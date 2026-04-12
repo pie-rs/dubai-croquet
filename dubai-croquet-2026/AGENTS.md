@@ -234,6 +234,18 @@ Environment file policy for this repo:
 
 Local development currently loads `.env.local`, `.env.development`, and `.env`. Keep Tina Cloud values in `.env.development` unless you specifically need to override them on one machine.
 
+Sentry placement for this repo:
+
+- `.env.development`
+  - `NEXT_PUBLIC_SENTRY_DSN`
+  - `SENTRY_ORG`
+  - `SENTRY_PROJECT`
+- `.env.local`
+  - `SENTRY_AUTH_TOKEN`
+  - duplicate `SENTRY_ORG` and `SENTRY_PROJECT` when you want local `next build` to mirror Vercel's Sentry build context
+- Vercel
+  - set all Sentry variables for Preview and Production
+
 Required for TinaCMS:
 
 ```

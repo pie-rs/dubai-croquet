@@ -96,6 +96,7 @@ Primary local development config for this project.
 - Use this for the shared local dev setup you expect to use while running `pnpm run dev` or `pnpm run tina:dev`.
 - This is the right place for your current Tina Cloud variables.
 - It is also a reasonable place for local Supabase values if you want one main local-dev file.
+- Keep non-secret Sentry config here for normal local development, such as `NEXT_PUBLIC_SENTRY_DSN`, `SENTRY_ORG`, and `SENTRY_PROJECT`.
 
 Example uses:
 
@@ -112,6 +113,8 @@ Developer-specific overrides on your machine.
 - Use this when you want to override values from `.env.development` without changing the shared local-dev baseline.
 - Good for machine-specific secrets or temporary overrides.
 - If the same variable exists in both `.env.development` and `.env.local`, treat `.env.local` as the override.
+- Keep private build-time secrets here, especially `SENTRY_AUTH_TOKEN`.
+- If you run `next build` locally and want Sentry release or sourcemap upload to work the same way it does on Vercel, also keep `SENTRY_ORG` and `SENTRY_PROJECT` available in `.env.local`.
 
 Typical use:
 
@@ -183,12 +186,24 @@ SENTRY_PROJECT=
 SENTRY_AUTH_TOKEN=
 ```
 
+Recommended local placement:
+
+- `.env.development`
+  - `NEXT_PUBLIC_SENTRY_DSN`
+  - `SENTRY_ORG`
+  - `SENTRY_PROJECT`
+- `.env.local`
+  - `SENTRY_AUTH_TOKEN`
+  - `SENTRY_ORG`
+  - `SENTRY_PROJECT` if you want local `next build` to have the same Sentry build context as Vercel
+
 ### When Values Are Actually Required
 
 - Public page rendering does not require Supabase env vars to exist.
 - Tina admin requires the Tina Cloud variables once you are using Tina Cloud-backed editing.
 - Form persistence requires `DATABASE_URL`. If it is missing, form endpoints return `503` instead of crashing.
 - Auth flows still need the Supabase public variables when you want the auth surface to function.
+- Sentry source-map upload and release creation require `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, and `SENTRY_PROJECT` in the environment used by `next build`.
 
 ## Scripts
 
