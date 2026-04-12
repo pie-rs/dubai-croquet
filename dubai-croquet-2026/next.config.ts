@@ -3,6 +3,10 @@ import { withSentryConfig } from '@sentry/nextjs'
 
 const nextConfig: NextConfig = {
   output: 'standalone',
+  outputFileTracingIncludes: {
+    '/*': ['./content/**/*'],
+    '/blog/[slug]': ['./content/**/*'],
+  },
   turbopack: {
     root: __dirname,
   },

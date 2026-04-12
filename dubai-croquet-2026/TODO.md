@@ -118,6 +118,7 @@ Every task or tightly scoped subtask must end with:
 - [x] Preserve exact legacy routes, including `/termsandconditions`
 - [x] Render blog `bottomSections`, supporting `recentPostsSection` in v1
 - [x] Ensure the homepage root route is emitted from the catch-all static params so `/` deploys correctly
+- [x] Ensure deployed standalone/Vercel output traces `content/**/*` so CMS-backed pages do not 404 in production
 - [x] **Test**: route integration tests for public pages
 - [x] **Test**: blog route tests for slug, date, featured image, body, and bottom section rendering
 - [x] **Commit**: `feat: add public page and blog routes`

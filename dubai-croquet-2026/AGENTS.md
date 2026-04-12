@@ -121,6 +121,7 @@ recentPostsSection  -> src/components/sections/recent-posts-section.tsx
 - Build: `pnpm run tina:build && pnpm run build`
 - The `_template` field on sections discriminates which component to render
 - During migration, read content through the shared filesystem-backed helpers in `src/lib/tina.ts`
+- Because deployed standalone output reads content from the filesystem, `next.config.ts` must keep `./content/**/*` in `outputFileTracingIncludes` so Vercel bundles pages, posts, team, and site config into the runtime
 - Defer Tina generated-client adoption until the public routes are in place and Tina Cloud setup is complete
 - Posts stay in MDX, but JSON-backed page/config/team fields store markdown-capable strings rather than Tina rich-text AST
 - Render those JSON-backed markdown strings with the shared markdown renderer once sections are built
