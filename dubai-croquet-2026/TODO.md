@@ -11,6 +11,7 @@ Every task or tightly scoped subtask must end with:
 - [x] Run `pnpm import` to convert `package-lock.json` to `pnpm-lock.yaml`
 - [x] Delete `package-lock.json`
 - [ ] Add `.npmrc` only if TinaCMS requires hoisting
+- [x] Commit `pnpm-workspace.yaml` build-script approvals for packages required by local installs and Vercel builds (`@sentry/cli`, `sharp`, `esbuild`, etc.)
 - [x] Run `pnpm install`
 - [x] Update `.husky/pre-commit` and package scripts to use `pnpm`
 - [x] Update `CLAUDE.md`, `AGENTS.md`, `TODO.md`, and `DESIGN.md` to match the actual package-manager and migration plan
@@ -110,15 +111,16 @@ Every task or tightly scoped subtask must end with:
 
 ## Phase 7: Routes and Blog Rendering
 
-- [ ] Create `src/app/(public)/[[...slug]]/page.tsx`
-- [ ] Create `src/app/(public)/blog/[slug]/page.tsx`
-- [ ] Add `generateStaticParams`
-- [ ] Add `generateMetadata`
-- [ ] Preserve exact legacy routes, including `/termsandconditions`
-- [ ] Render blog `bottomSections`, supporting `recentPostsSection` in v1
-- [ ] **Test**: route integration tests for public pages
-- [ ] **Test**: blog route tests for slug, date, featured image, body, and bottom section rendering
-- [ ] **Commit**: `feat: add public page and blog routes`
+- [x] Create `src/app/(public)/[[...slug]]/page.tsx`
+- [x] Create `src/app/(public)/blog/[slug]/page.tsx`
+- [x] Add `generateStaticParams`
+- [x] Add `generateMetadata`
+- [x] Preserve exact legacy routes, including `/termsandconditions`
+- [x] Render blog `bottomSections`, supporting `recentPostsSection` in v1
+- [x] Ensure the homepage root route is emitted from the catch-all static params so `/` deploys correctly
+- [x] **Test**: route integration tests for public pages
+- [x] **Test**: blog route tests for slug, date, featured image, body, and bottom section rendering
+- [x] **Commit**: `feat: add public page and blog routes`
 
 ## Phase 8: Forms and Handlers
 

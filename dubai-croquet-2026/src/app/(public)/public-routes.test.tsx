@@ -59,10 +59,14 @@ describe('public route contracts', () => {
     vi.clearAllMocks()
   })
 
-  it('builds static params for content pages excluding the homepage', async () => {
+  it('builds static params for content pages including the homepage', async () => {
     mockedGetAllPages.mockResolvedValue([{ slug: '' }, { slug: 'faq' }, { slug: 'termsandconditions' }])
 
-    await expect(generatePageStaticParams()).resolves.toEqual([{ slug: ['faq'] }, { slug: ['termsandconditions'] }])
+    await expect(generatePageStaticParams()).resolves.toEqual([
+      {},
+      { slug: ['faq'] },
+      { slug: ['termsandconditions'] },
+    ])
   })
 
   it('loads a content page by slug and forwards sections to the renderer', async () => {

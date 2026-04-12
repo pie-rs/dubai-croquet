@@ -21,10 +21,15 @@ export default async function PublicContentPage({ params }: PublicPageProps) {
 export async function generateStaticParams() {
   const pages = await getAllPages()
 
-  return pages
-    .map((page) => (typeof page.slug === 'string' ? page.slug : ''))
-    .filter((slug) => slug.length > 0)
-    .map((slug) => ({ slug: slug.split('/') }))
+  return pages.map((page) => {
+    const slug = typeof page.slug === 'string' ? page.slug : ''
+
+    if (slug.length === 0) {
+      return {}
+    }
+
+    return { slug: slug.split('/') }
+  })
 }
 
 export async function generateMetadata({ params }: PublicPageProps): Promise<Metadata> {

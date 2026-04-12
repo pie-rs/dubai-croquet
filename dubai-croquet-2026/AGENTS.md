@@ -28,6 +28,7 @@ This project uses `pnpm`. All commands should use `pnpm`:
 - `pnpm test`, `pnpm run lint`, `pnpm run build`
 - `pnpm run lint` is intentionally scoped to source, Tina, and top-level config files so generated admin output does not blow up ESLint memory usage
 - Installs run from a nested project directory, so the `prepare` script intentionally skips Husky installation unless the package is the git root
+- Build-script approvals are committed in `pnpm-workspace.yaml`. Keep `@sentry/cli`, `sharp`, `esbuild`, and other approved packages in version control so local installs and Vercel builds stay aligned
 
 ### Two Processes (inherited from template)
 
